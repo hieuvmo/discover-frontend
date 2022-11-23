@@ -1,11 +1,29 @@
-import { Button } from "antd";
-import "./App.css";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+import { CommonSuspense } from "components";
+import { AppLayout } from "layouts";
+import { NotFoundPage } from "pages";
+import { routerList } from "routers/router.routes";
+import { IRouter } from "types/router.model";
 
 function App() {
   return (
-    <div className="App">
-      <Button type="primary">test</Button>
-    </div>
+    <BrowserRouter>
+      <CommonSuspense>
+        <Routes>
+          <Route element={<AppLayout />}>
+            {routerList.map((route: IRouter) => (
+              <Route
+                key={route.path}
+                path={route.path}
+                element={<CommonSuspense>{route.element}</CommonSuspense>}
+              />
+            ))}
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </CommonSuspense>
+    </BrowserRouter>
   );
 }
 

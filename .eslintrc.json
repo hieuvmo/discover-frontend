@@ -129,7 +129,8 @@
     "react-hooks/exhaustive-deps": "warn",
     "react/function-component-definition": "off",
     "react/button-has-type": "off",
-    "no-unused-expressions": "off"
+    "no-unused-expressions": "off",
+    "arrow-body-style": "off"
   },
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],
