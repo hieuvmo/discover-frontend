@@ -29,7 +29,7 @@
     "react/react-in-jsx-scope": "off",
     "consistent-return": "off",
     "semi": "off",
-    "@typescript-eslint/semi": ["error"],
+    "@typescript-eslint/semi": "off",
     "linebreak-style": "off",
     "@typescript-eslint/explicit-function-return-type": "off",
     "import/extensions": [
@@ -130,7 +130,8 @@
     "react/function-component-definition": "off",
     "react/button-has-type": "off",
     "no-unused-expressions": "off",
-    "arrow-body-style": "off"
+    "arrow-body-style": "off",
+    "react/require-default-props": "off"
   },
   "settings": {
     "import/extensions": [".js", ".jsx", ".ts", ".tsx"],

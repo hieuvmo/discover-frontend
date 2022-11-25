@@ -17,6 +17,10 @@ module.exports = {
       },
       colors: {
         primary: "#7F56D9"
+      },
+      boxShadow: {
+        select:
+          "0px 0.6px 1.8px rgba(0, 0, 0, 0.19), 0px 3.2px 7.2px rgba(0, 0, 0, 0.27)"
       }
     }
   },
