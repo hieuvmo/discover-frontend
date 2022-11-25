@@ -1,5 +1,6 @@
 export const routerPaths = {
-  HOME: "/",
+  HOME: "/home",
   NOT_FOUND: "/404",
-  LAPTOP: "/laptop"
+  LAPTOP_LIST: "/laptop",
+  LAPTOP_DETAIL: "/laptop/:id"
 };

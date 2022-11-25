@@ -4,7 +4,7 @@ import { CommonSuspense } from "components";
 import { AppLayout } from "layouts";
 import { NotFoundPage } from "pages";
 import { routerList } from "routers/router.routes";
-import { IRouter } from "types/router.model";
+import { IChildrenRouter, IRouter } from "types/router.model";
 
 function App() {
   return (
@@ -12,13 +12,35 @@ function App() {
       <CommonSuspense>
         <Routes>
           <Route element={<AppLayout />}>
-            {routerList.map((route: IRouter) => (
-              <Route
-                key={route.path}
-                path={route.path}
-                element={<CommonSuspense>{route.element}</CommonSuspense>}
-              />
-            ))}
+            {routerList.map(({ path, element, children }: IRouter) => {
+              if (children && children.length > 0) {
+                return (
+                  <Route key={path}>
+                    <Route
+                      key={path}
+                      path={path}
+                      element={<CommonSuspense>{element}</CommonSuspense>}
+                    />
+                    {children.map((route: IChildrenRouter) => (
+                      <Route
+                        key={route.path}
+                        path={route.path}
+                        element={
+                          <CommonSuspense>{route.element}</CommonSuspense>
+                        }
+                      />
+                    ))}
+                  </Route>
+                );
+              }
+              return (
+                <Route
+                  key={path}
+                  path={path}
+                  element={<CommonSuspense>{element}</CommonSuspense>}
+                />
+              );
+            })}
           </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>

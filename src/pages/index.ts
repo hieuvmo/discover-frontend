@@ -1,3 +1,4 @@
 export * from "./404";
 export * from "./Home";
-export * from "./ProductList";
+export * from "./LaptopList";
+export * from "./LaptopDetail";
