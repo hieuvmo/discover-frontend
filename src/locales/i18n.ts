@@ -5,6 +5,8 @@ import LanguageDetector from "i18next-browser-languagedetector";
 import { getLocalStorageItem } from "helpers/storage";
 import commonEn from "./en/common.json";
 import commonVi from "./vi/common.json";
+import authEn from "./en/auth.json";
+import authVi from "./vi/auth.json";
 
 const currentLanguage = getLocalStorageItem("i18nextLng") || "vi";
 
@@ -13,8 +15,8 @@ i18n
   .use(LanguageDetector)
   .init({
     resources: {
-      en: { common: commonEn },
-      vi: { common: commonVi }
+      en: { common: commonEn, auth: authEn },
+      vi: { common: commonVi, auth: authVi }
     },
     lng: currentLanguage,
     fallbackLng: "vi",
