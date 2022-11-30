@@ -1,16 +1,31 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import "moment/dist/locale/vi";
+import moment from "moment";
 
 import { CommonSuspense } from "components";
 import { AppLayout } from "layouts";
 import { NotFoundPage } from "pages";
 import { routerList } from "routers/router.routes";
+import { routerPaths } from "routers/router.paths";
 import { IChildrenRouter, IRouter } from "types/router.model";
+import useEffectOnce from "hooks/useEffectOnce";
+import { getLocalStorageItem } from "helpers/storage";
 
-function App() {
+const App = () => {
+  const currentLanguage = getLocalStorageItem("i18nextLng");
+
+  useEffectOnce(() => {
+    if (currentLanguage) moment.locale(currentLanguage);
+  });
+
   return (
     <BrowserRouter>
       <CommonSuspense>
         <Routes>
+          <Route
+            path="/"
+            element={<Navigate replace to={routerPaths.HOME} />}
+          />
           <Route element={<AppLayout />}>
             {routerList.map(({ path, element, children }: IRouter) => {
               if (children && children.length > 0) {
@@ -47,6 +62,6 @@ function App() {
       </CommonSuspense>
     </BrowserRouter>
   );
-}
+};
 
 export default App;

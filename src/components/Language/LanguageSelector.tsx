@@ -8,6 +8,7 @@ import {
 import clsx from "clsx";
 import { DefaultOptionType } from "antd/es/select";
 import { useTranslation } from "react-i18next";
+import moment from "moment";
 
 import { ChevronDownIcon, GlobeIcon } from "icons";
 import { ALL_LANGUAGE } from "constants/language";
@@ -47,7 +48,9 @@ const LanguageSelector = ({
       if (selectedLanguage !== selectedOption)
         setSelectedLanguage(selectedOption);
       setIsDropDown(false);
+      // set language and moment after choose language
       i18n.changeLanguage(String(selectedOption?.value));
+      moment.locale(String(selectedOption?.value));
     },
     [i18n, selectedLanguage]
   );
