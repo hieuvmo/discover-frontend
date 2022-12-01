@@ -1,0 +1,24 @@
+.ImgLoading {
+    filter: blur(15px);
+    clip-path: inset(0);
+}
+
+.ImgLoaded {
+    filter: blur(0px);
+    transition: filter 0.4s linear;
+}
+
+.imgPreview {
+    height: max-content;
+    object-fit: cover;
+    height: 100%;
+    width: 100%;
+}
+
+.cursorPointer {
+    cursor: pointer !important;
+}
+
+.modal {
+    transform: translate(0) !important;
+}
