@@ -1,34 +1,67 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
+import "moment/dist/locale/vi";
+import moment from "moment";
 
-function App() {
-  const [count, setCount] = useState(0)
+import { CommonSuspense } from "components";
+import { AppLayout } from "layouts";
+import { NotFoundPage } from "pages";
+import { routerList } from "routers/router.routes";
+import { routerPaths } from "routers/router.paths";
+import { IChildrenRouter, IRouter } from "types/router.model";
+import useEffectOnce from "hooks/useEffectOnce";
+import { getLocalStorageItem } from "helpers/storage";
+
+const App = () => {
+  const currentLanguage = getLocalStorageItem("i18nextLng");
+
+  useEffectOnce(() => {
+    if (currentLanguage) moment.locale(currentLanguage);
+  });
 
   return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
-}
+    <BrowserRouter>
+      <CommonSuspense>
+        <Routes>
+          <Route
+            path="/"
+            element={<Navigate replace to={routerPaths.HOME} />}
+          />
+          <Route element={<AppLayout />}>
+            {routerList.map(({ path, element, children }: IRouter) => {
+              if (children && children.length > 0) {
+                return (
+                  <Route key={path}>
+                    <Route
+                      key={path}
+                      path={path}
+                      element={<CommonSuspense>{element}</CommonSuspense>}
+                    />
+                    {children.map((route: IChildrenRouter) => (
+                      <Route
+                        key={route.path}
+                        path={route.path}
+                        element={
+                          <CommonSuspense>{route.element}</CommonSuspense>
+                        }
+                      />
+                    ))}
+                  </Route>
+                );
+              }
+              return (
+                <Route
+                  key={path}
+                  path={path}
+                  element={<CommonSuspense>{element}</CommonSuspense>}
+                />
+              );
+            })}
+          </Route>
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </CommonSuspense>
+    </BrowserRouter>
+  );
+};
 
-export default App
+export default App;
