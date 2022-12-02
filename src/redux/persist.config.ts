@@ -5,8 +5,7 @@ import counterReducer from "./features/counter.slice";
 
 const counterPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   key: "counter",
-  storage,
-  blacklist: ["value"]
+  storage
 };
 
 export default {
