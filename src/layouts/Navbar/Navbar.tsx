@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { LanguageSelector } from "components";
 import { Logo, MenuIcon } from "icons";
 import { routerPaths } from "routers/router.paths";
+import NavUser from "./NavUser";
+import NavCart from "./NavCart";
+import NavSearch from "./NavSearch";
 
 interface NavBarProps {
   navVisible: boolean;
@@ -19,7 +22,7 @@ const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
   return (
     <nav
       className={clsx(
-        `flex justify-center items-center h-11 sm:!h-20 px-4 sm:px-[100px] 
+        `flex justify-between items-center h-11 sm:!h-20 px-4 sm:px-6 
         border-b-[1px] border-solid border-[#E0E0E0] bg-white`,
         navVisible && "!hidden sm:!flex"
       )}
@@ -34,7 +37,12 @@ const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
           onClick={navigateToHomePage}
         />
       </div>
-      <LanguageSelector />
+      <div className="flex items-center gap-6">
+        <LanguageSelector />
+        <NavSearch />
+        <NavCart />
+        <NavUser />
+      </div>
     </nav>
   );
 };
