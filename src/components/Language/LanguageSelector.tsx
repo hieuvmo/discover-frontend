@@ -29,12 +29,8 @@ const LanguageSelector = ({
   const { t, i18n } = useTranslation();
   const currentLanguage = getLocalStorageItem("i18nextLng");
 
-  const handleClickOutsideLanguageSelector = (event: MouseEvent) => {
-    if (event.target instanceof HTMLElement) {
-      if (selectRef.current && !selectRef.current?.contains(event.target)) {
-        setIsDropDown(false);
-      }
-    }
+  const handleClickOutsideLanguageSelector = () => {
+    setIsDropDown(false);
   };
 
   useOnClickOutside(selectRef, handleClickOutsideLanguageSelector);
