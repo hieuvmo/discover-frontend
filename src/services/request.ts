@@ -19,7 +19,7 @@ requestAPI.interceptors.request.use(
 );
 
 requestAPI.interceptors.response.use(
-  (response: any) => response,
+  (response: any) => response.data,
   async (exception) => {
     if (
       exception.response.status === 404 ||
@@ -55,7 +55,7 @@ requestHeader.interceptors.request.use(
 );
 
 requestHeader.interceptors.response.use(
-  (response: any) => response,
+  (response: any) => response.data,
   async (exception) => {
     if (
       exception.response.status === 404 ||
