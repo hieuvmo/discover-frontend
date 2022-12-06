@@ -1,5 +1,6 @@
 import { Dropdown, MenuProps } from "antd";
 import { useTranslation } from "react-i18next";
+import { memo } from "react";
 
 import { AddUserIcon, LoginIcon, UserIcon } from "icons";
 
@@ -28,4 +29,4 @@ const NavUser = () => {
   );
 };
 
-export default NavUser;
+export default memo(NavUser);

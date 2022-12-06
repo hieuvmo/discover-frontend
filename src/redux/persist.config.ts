@@ -1,13 +1,21 @@
 import { persistReducer, PersistConfig } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
-import counterReducer from "./features/counter.slice";
+import searchReducer from "./features/search.slice";
+import laptopReducer from "./features/laptop.slice";
 
-const counterPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
-  key: "counter",
+const searchPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
+  key: "search",
+  storage,
+  blacklist: ["value", "showedSearchBar"]
+};
+
+const laptopPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
+  key: "laptop",
   storage
 };
 
 export default {
-  counter: persistReducer(counterPersistConfig, counterReducer)
+  search: persistReducer(searchPersistConfig, searchReducer),
+  laptop: persistReducer(laptopPersistConfig, laptopReducer)
 };

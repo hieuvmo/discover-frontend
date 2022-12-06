@@ -1,4 +1,6 @@
 import { Badge } from "antd";
+import { memo } from "react";
+
 import { CartIcon } from "icons";
 
 const NavCart = () => {
@@ -9,4 +11,4 @@ const NavCart = () => {
   );
 };
 
-export default NavCart;
+export default memo(NavCart);
