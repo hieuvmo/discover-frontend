@@ -9,12 +9,12 @@ const NavUser = () => {
 
   const navSearchList: MenuProps["items"] = [
     {
-      key: "0",
+      key: String(t("auth:log_in")),
       label: <div className="text-base">{t("auth:log_in")}</div>,
       icon: <LoginIcon width={14} height={22} />
     },
     {
-      key: "1",
+      key: String(t("auth:register")),
       label: <div className="text-base">{t("auth:register")}</div>,
       icon: <AddUserIcon width={14} height={22} />
     }

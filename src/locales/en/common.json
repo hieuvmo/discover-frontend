@@ -1,5 +1,8 @@
 {
   "home": "Home",
   "laptop": "Laptop",
-  "no_data": "No data"
+  "no_data": "No data",
+  "result": "result",
+  "system_error": "The system is having an error. Please try again later",
+  "expired_token": "Login session expired. Please log in again"
 }

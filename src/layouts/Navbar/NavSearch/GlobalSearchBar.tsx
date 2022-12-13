@@ -1,4 +1,11 @@
-import { ChangeEvent, memo, useEffect, useMemo } from "react";
+import {
+  ChangeEvent,
+  memo,
+  useEffect,
+  useMemo,
+  startTransition,
+  useState
+} from "react";
 import { Dropdown, Input, Spin } from "antd";
 import { ItemType } from "antd/es/menu/hooks/useItems";
 import { LoadingOutlined } from "@ant-design/icons";
@@ -6,7 +13,6 @@ import { useNavigate } from "react-router";
 import { useTranslation } from "react-i18next";
 
 import { SearchIcon } from "icons";
-import useDebounce from "hooks/useDebounce";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { ILaptop } from "types/laptop.model";
 import {
@@ -25,10 +31,13 @@ const GlobalSearchBar = () => {
     (state: RootState) => state.laptop
   );
   const { value } = useAppSelector((state: RootState) => state.search);
-  const debouncedValue = useDebounce<string>(value);
+  const [filterText, setFilterText] = useState("");
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     dispatch(setSearchValue(event.target.value));
+    startTransition(() => {
+      setFilterText(event.target.value);
+    });
   };
 
   const dropdownLaptop: ItemType[] = useMemo(() => {
@@ -38,10 +47,10 @@ const GlobalSearchBar = () => {
     };
 
     const matchedLaptop = laptopList.filter((laptop: ILaptop) =>
-      laptop.productName.toLowerCase().includes(debouncedValue.toLowerCase())
+      laptop.productName.toLowerCase().includes(filterText.toLowerCase())
     );
 
-    if (matchedLaptop.length !== 0) {
+    if (matchedLaptop.length) {
       return matchedLaptop.map((laptop: ILaptop) => ({
         key: laptop._id,
         label: (
@@ -55,10 +64,18 @@ const GlobalSearchBar = () => {
     return [
       {
         key: "no_data",
-        label: <div className="py-4 text-center">{t("common:no_data")}</div>
+        label: loading ? (
+          <div className="flex h-60 justify-center items-center">
+            <Spin
+              indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
+            />
+          </div>
+        ) : (
+          <div className="py-4 text-center">{t("common:no_data")}</div>
+        )
       }
     ];
-  }, [debouncedValue, dispatch, laptopList, navigate, t]);
+  }, [filterText, dispatch, laptopList, navigate, t]);
 
   useEffect(() => {
     dispatch(getLaptopListRequest());
@@ -74,10 +91,9 @@ const GlobalSearchBar = () => {
           className="px-4 py-2 w-[800px]"
           prefix={<SearchIcon fill="#7F56D9" width={18} />}
           suffix={
-            loading && (
-              <Spin
-                indicator={<LoadingOutlined style={{ fontSize: 24 }} spin />}
-              />
+            value.length &&
+            dropdownLaptop[0]?.key !== "no_data" && (
+              <span>{`${dropdownLaptop.length} ${t("common:result")}`}</span>
             )
           }
           value={value}
