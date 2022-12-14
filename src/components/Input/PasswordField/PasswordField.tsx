@@ -6,6 +6,7 @@ import { LabelWrapper, RequireText } from "./PasswordField.styled";
 
 interface InputProps extends AntdInputProps {
   label?: string;
+  labelRequired?: boolean;
   containerClassName?: string;
   errors?: string;
   errTextStyle?: CSSProperties;
@@ -15,7 +16,7 @@ interface InputProps extends AntdInputProps {
 const PasswordField = forwardRef<any, InputProps>((props, ref) => {
   const {
     label,
-    required,
+    labelRequired,
     containerClassName,
     errors,
     errTextStyle,
@@ -40,16 +41,10 @@ const PasswordField = forwardRef<any, InputProps>((props, ref) => {
     <div className={containerClassName} key={uniqueKey} itemProp={marginNone}>
       {label && (
         <LabelWrapper>
-          {label} {required && <RequireText>*</RequireText>}
+          {label} {labelRequired && <RequireText>*</RequireText>}
         </LabelWrapper>
       )}
-      <Input.Password
-        className="px-4 py-1.5"
-        ref={ref}
-        allowClear
-        required={required}
-        {...other}
-      />
+      <Input.Password className="px-4 py-1.5" ref={ref} allowClear {...other} />
       {renderErrorText}
     </div>
   );
