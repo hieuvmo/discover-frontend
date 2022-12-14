@@ -16,7 +16,8 @@ module.exports = {
         "2xl-max": { max: "1320px" }
       },
       colors: {
-        primary: "#7F56D9"
+        primary: "#7F56D9",
+        error: "#ff4d4f"
       },
       boxShadow: {
         select:
