@@ -24,3 +24,5 @@ export interface ISignUp {
 export interface ILogin extends Pick<ISignUp, "email" | "password"> {
   rememberPsw?: boolean;
 }
+
+export type IForgotPsw = Pick<ISignUp, "email">;

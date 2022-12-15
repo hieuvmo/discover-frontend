@@ -5,6 +5,11 @@ import { Checkbox } from "antd";
 
 import { CommonButton, PasswordField, TextField } from "components";
 import { ILogin } from "types/auth.model";
+import { useAppDispatch } from "hooks/useRedux";
+import {
+  showForgotPswFormModal,
+  showSignUpFormModal
+} from "redux/features/auth.slice";
 import { initialLoginFormValues, loginFormSchema } from "./Login.constants";
 import {
   ForgotPswText,
@@ -17,6 +22,12 @@ import {
 
 const LoginForm = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const handleNavigateToAuthModule = (mode: "sign-up" | "forgot-psw") => {
+    mode === "sign-up" && dispatch(showSignUpFormModal());
+    mode === "forgot-psw" && dispatch(showForgotPswFormModal());
+  };
 
   const {
     handleSubmit,
@@ -80,7 +91,11 @@ const LoginForm = () => {
             />
             <RememberPswText>{t("auth:remember_psw")}</RememberPswText>
           </RememberPswWrapper>
-          <ForgotPswText>{t("auth:forgot_psw")}</ForgotPswText>
+          <ForgotPswText
+            onClick={() => handleNavigateToAuthModule("forgot-psw")}
+          >
+            {t("auth:forgot_psw")}
+          </ForgotPswText>
         </PasswordWrapper>
 
         <CommonButton
@@ -92,7 +107,9 @@ const LoginForm = () => {
 
       <NotHaveAccount>
         {t("auth:not_have_account")}
-        <span>{t("auth:sign_up")}</span>
+        <span onClick={() => handleNavigateToAuthModule("sign-up")}>
+          {t("auth:sign_up")}
+        </span>
       </NotHaveAccount>
     </>
   );

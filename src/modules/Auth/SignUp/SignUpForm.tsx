@@ -1,7 +1,9 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import { CommonButton, PasswordField, TextField } from "components";
+import { useAppDispatch } from "hooks/useRedux";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
+import { showLoginFormModal } from "redux/features/auth.slice";
 
 import { ISignUp } from "types/auth.model";
 import { initialSignUpFormValues, signUpFormSchema } from "./SignUp.constants";
@@ -9,6 +11,11 @@ import { FullNameWrapper, HaveAccount, SignUpTitle } from "./SignUpForm.styled";
 
 const SignUpForm = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
+
+  const handleNavigateToLogin = () => {
+    dispatch(showLoginFormModal());
+  };
 
   const {
     handleSubmit,
@@ -116,7 +123,7 @@ const SignUpForm = () => {
 
       <HaveAccount>
         {t("auth:have_account")}
-        <span>{t("auth:log_in")}</span>
+        <span onClick={handleNavigateToLogin}>{t("auth:log_in")}</span>
       </HaveAccount>
     </>
   );
