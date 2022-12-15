@@ -1,5 +1,8 @@
 {
   "home": "Trang chủ",
   "laptop": "Laptop",
-  "no_data": "Không có dữ liệu"
+  "no_data": "Không có dữ liệu",
+  "result": "kết quả",
+  "system_error": "Hệ thống đang gặp lỗi. Vui lòng thử lại sau",
+  "expired_token": "Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại"
 }

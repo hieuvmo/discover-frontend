@@ -2,13 +2,17 @@ import { combineReducers, configureStore, Reducer } from "@reduxjs/toolkit";
 import { persistStore } from "redux-persist";
 import createSagaMiddleware from "@redux-saga/core";
 
-import counterReducer from "./features/counter.slice";
+import searchReducer from "./features/search.slice";
+import laptopReducer from "./features/laptop.slice";
 import persistConfig from "./persist.config";
 import rootSaga from "./root.saga";
 
 const sagaMiddleware = createSagaMiddleware();
 
-const combinedReducers = combineReducers({ counter: counterReducer });
+const combinedReducers = combineReducers({
+  search: searchReducer,
+  laptop: laptopReducer
+});
 
 export const store = configureStore({
   reducer: combineReducers(persistConfig) as Reducer,

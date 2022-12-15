@@ -7,10 +7,14 @@ const endPointAPIs = {
   PROFILE: "/api/profile"
 };
 
-export const authAPI = {
-  signup: `${endPointAPIs.AUTH}/sign-up`,
-  login: `${endPointAPIs.AUTH}/log-in`,
-  logout: `${endPointAPIs.AUTH}/log-out`,
-  forgotPassword: `${endPointAPIs.AUTH}/password-recover`,
-  changePassword: `${endPointAPIs.AUTH}/change-password`
+export const authAPIs = {
+  SIGNUP: `${endPointAPIs.AUTH}/sign-up`,
+  LOGIN: `${endPointAPIs.AUTH}/log-in`,
+  LOGOUT: `${endPointAPIs.AUTH}/log-out`,
+  FORGOT_PASSWORD: `${endPointAPIs.AUTH}/password-recover`,
+  CHANGE_PASSWORD: `${endPointAPIs.AUTH}/change-password`
+};
+
+export const laptopAPIs = {
+  LIST: `${endPointAPIs.LAPTOP}`
 };

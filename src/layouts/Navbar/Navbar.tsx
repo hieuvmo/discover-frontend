@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 import { LanguageSelector } from "components";
 import { Logo, MenuIcon } from "icons";
 import { routerPaths } from "routers/router.paths";
-import NavUser from "./NavUser";
-import NavCart from "./NavCart";
-import NavSearch from "./NavSearch";
+import NavUser from "./NavUser/NavUser";
+import NavCart from "./NavCart/NavCart";
+import NavSearch from "./NavSearch/NavSearch";
 
 interface NavBarProps {
   navVisible: boolean;

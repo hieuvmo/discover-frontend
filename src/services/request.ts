@@ -1,9 +1,10 @@
 /* eslint-disable no-return-await */
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { notification } from "antd";
 
 import { SERVICE_API } from "constants/path.api";
 import { getCookie } from "helpers/storage";
+import { i18nTranslate } from "helpers/language";
 
 export const requestAPI = axios.create({
   baseURL: SERVICE_API,
@@ -19,14 +20,14 @@ requestAPI.interceptors.request.use(
 );
 
 requestAPI.interceptors.response.use(
-  (response: any) => response,
+  (response: AxiosResponse<any>) => response.data,
   async (exception) => {
     if (
       exception.response.status === 404 ||
       exception.response.status === 500
     ) {
       notification.error({
-        message: "Hệ thống đang gặp lỗi. Vui lòng thử lại sau"
+        message: i18nTranslate("common:system_error")
       });
     }
     return await Promise.reject(exception.response.data);
@@ -43,8 +44,7 @@ export const requestHeader = axios.create({
 
 requestHeader.interceptors.request.use(
   (request: AxiosRequestConfig) => {
-    request.timeoutErrorMessage =
-      "Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại";
+    request.timeoutErrorMessage = i18nTranslate("common:expired_token");
     const token = getCookie("access-token");
     request.headers = {
       Authorization: `Bearer ${token as string}`
@@ -55,14 +55,14 @@ requestHeader.interceptors.request.use(
 );
 
 requestHeader.interceptors.response.use(
-  (response: any) => response,
+  (response: AxiosResponse<any>) => response.data,
   async (exception) => {
     if (
       exception.response.status === 404 ||
       exception.response.status === 500
     ) {
       notification.error({
-        message: "Hệ thống đang gặp lỗi. Vui lòng thử lại sau"
+        message: i18nTranslate("common:system_error")
       });
     }
     return await Promise.reject(exception.response.data);
