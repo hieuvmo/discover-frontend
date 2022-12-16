@@ -1,9 +1,28 @@
-export interface ISignUp {
-  first_name?: string;
-  last_name?: string;
-  email: string;
-  password: string;
-  confirm_password?: string;
+/* eslint-disable no-unused-vars */
+export enum IUserRole {
+  ADMIN = "Admin",
+  USER = "User",
+  SPECIALIST = "Specialist"
 }
 
-export type ILogin = Pick<ISignUp, "email" | "password">;
+export enum IUserStatus {
+  ACTIVE = "Active",
+  IN_ACTIVE = "InActive",
+  BAN = "Ban"
+}
+
+export interface ISignUp {
+  email: string;
+  password: string;
+  confirmPsw?: string;
+  firstName?: string;
+  lastName?: string;
+  role?: IUserRole;
+  status?: IUserStatus;
+}
+
+export interface ILogin extends Pick<ISignUp, "email" | "password"> {
+  rememberPsw?: boolean;
+}
+
+export type IForgotPsw = Pick<ISignUp, "email">;

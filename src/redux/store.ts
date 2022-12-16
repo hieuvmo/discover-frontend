@@ -4,6 +4,7 @@ import createSagaMiddleware from "@redux-saga/core";
 
 import searchReducer from "./features/search.slice";
 import laptopReducer from "./features/laptop.slice";
+import authReducer from "./features/auth.slice";
 import persistConfig from "./persist.config";
 import rootSaga from "./root.saga";
 
@@ -11,7 +12,8 @@ const sagaMiddleware = createSagaMiddleware();
 
 const combinedReducers = combineReducers({
   search: searchReducer,
-  laptop: laptopReducer
+  laptop: laptopReducer,
+  auth: authReducer
 });
 
 export const store = configureStore({

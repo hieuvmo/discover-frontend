@@ -6,10 +6,10 @@ import { CSSProperties } from "styled-components";
 import { LabelWrapper, RequireText } from "./TextField.styled";
 
 interface InputProps extends AntdInputProps {
-  name: string;
   label?: string;
+  labelRequired?: boolean;
   containerClassName?: string;
-  errors?: { [x: string]: any };
+  errors?: string;
   errTextStyle?: CSSProperties;
   marginNone?: "marginNone" | "";
 }
@@ -17,9 +17,8 @@ interface InputProps extends AntdInputProps {
 const TextField = forwardRef<any, InputProps>((props, ref) => {
   const {
     label,
-    required,
+    labelRequired,
     containerClassName,
-    name,
     errors,
     errTextStyle,
     marginNone = "",
@@ -28,25 +27,25 @@ const TextField = forwardRef<any, InputProps>((props, ref) => {
   const uniqueKey = useId();
 
   const renderErrorText = useMemo(() => {
-    if (errors && errors?.[name]) {
+    if (errors) {
       return (
-        <div style={errTextStyle} className="error-text">
-          {String(errors?.[name]?.message)}
+        <div style={errTextStyle} className="text-error text-sm mt-1">
+          {String(errors)}
         </div>
       );
     }
 
-    return null;
-  }, [errTextStyle, errors, name]);
+    return <div />;
+  }, [errTextStyle, errors]);
 
   return (
     <div className={containerClassName} key={uniqueKey} itemProp={marginNone}>
       {label && (
         <LabelWrapper>
-          {required && <RequireText>*</RequireText>} {label}
+          {label} {labelRequired && <RequireText>*</RequireText>}
         </LabelWrapper>
       )}
-      <Input ref={ref} allowClear required={required} {...other} />
+      <Input className="px-4 py-1.5" ref={ref} allowClear {...other} />
       {renderErrorText}
     </div>
   );
