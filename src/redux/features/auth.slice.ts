@@ -14,18 +14,21 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    showLoginFormModal: (state: AuthState) => {
-      state.modalMode = "login";
-      state.showModal = true;
-    },
-    showSignUpFormModal: (state: AuthState) => {
-      state.modalMode = "sign-up";
-      state.showModal = true;
-    },
-    showForgotPswFormModal: (state: AuthState) => {
-      state.modalMode = "forgot-psw";
-      state.showModal = true;
-    },
+    showLoginFormModal: (state: AuthState): AuthState => ({
+      ...state,
+      modalMode: "login",
+      showModal: true
+    }),
+    showSignUpFormModal: (state: AuthState): AuthState => ({
+      ...state,
+      modalMode: "sign-up",
+      showModal: true
+    }),
+    showForgotPswFormModal: (state: AuthState): AuthState => ({
+      ...state,
+      modalMode: "forgot-psw",
+      showModal: true
+    }),
     unShowAuthModal: (state: AuthState) => ({
       ...state,
       modalMode: null,

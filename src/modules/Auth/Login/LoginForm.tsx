@@ -16,7 +16,6 @@ import {
   LoginTitle,
   NotHaveAccount,
   PasswordWrapper,
-  RememberPswText,
   RememberPswWrapper
 } from "./LoginForm.styled";
 
@@ -25,8 +24,8 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
 
   const handleNavigateToAuthModule = (mode: "sign-up" | "forgot-psw") => {
-    mode === "sign-up" && dispatch(showSignUpFormModal());
-    mode === "forgot-psw" && dispatch(showForgotPswFormModal());
+    if (mode === "sign-up") dispatch(showSignUpFormModal());
+    dispatch(showForgotPswFormModal());
   };
 
   const {
@@ -86,10 +85,11 @@ const LoginForm = () => {
               name="rememberPsw"
               control={control}
               render={({ field: { onChange, value, ref } }) => (
-                <Checkbox ref={ref} onChange={onChange} checked={value} />
+                <Checkbox ref={ref} onChange={onChange} checked={value}>
+                  {t("auth:remember_psw")}
+                </Checkbox>
               )}
             />
-            <RememberPswText>{t("auth:remember_psw")}</RememberPswText>
           </RememberPswWrapper>
           <ForgotPswText
             onClick={() => handleNavigateToAuthModule("forgot-psw")}

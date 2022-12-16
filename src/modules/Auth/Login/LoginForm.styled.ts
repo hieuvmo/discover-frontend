@@ -10,11 +10,6 @@ export const RememberPswWrapper = styled.div`
   display: flex;
 `;
 
-export const RememberPswText = styled.p`
-  font-size: 14px;
-  margin-left: 0.5rem;
-`;
-
 export const ForgotPswText = styled.p`
   text-decoration: underline;
   font-weight: 600;

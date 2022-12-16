@@ -20,8 +20,8 @@ const NavUser = () => {
   );
 
   const handleClickNavUserItem = (mode: "login" | "sign-up") => {
-    mode === "login" && dispatch(showLoginFormModal());
-    mode === "sign-up" && dispatch(showSignUpFormModal());
+    if (mode === "login") dispatch(showLoginFormModal());
+    dispatch(showSignUpFormModal());
   };
 
   const handleCancelModal = () => {
