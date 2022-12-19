@@ -1,7 +1,7 @@
 export const SERVICE_API = "http://localhost:5000";
 
 const endPointAPIs = {
-  AUTH: "/api/user/",
+  AUTH: "/api/user",
   LAPTOP: "/api/laptop",
   RECEIPT: "/api/receipt",
   PROFILE: "/api/profile"

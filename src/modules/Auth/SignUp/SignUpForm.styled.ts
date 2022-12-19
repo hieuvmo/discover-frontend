@@ -30,3 +30,10 @@ export const HaveAccount = styled.div`
     user-select: none;
   }
 `;
+
+export const APIErrorMessage = styled.div`
+  color: #ff4d4f;
+  margin-bottom: 1.25rem;
+  text-align: center;
+  font-weight: 500;
+`;

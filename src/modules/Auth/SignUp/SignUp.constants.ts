@@ -1,6 +1,6 @@
 import * as Yup from "yup";
 
-import { ISignUp, IUserRole, IUserStatus } from "types/auth.model";
+import { ISignUp } from "types/auth.model";
 import {
   i18nTranslate,
   maximumCharacter,
@@ -12,9 +12,7 @@ export const initialSignUpFormValues: ISignUp = {
   lastName: "",
   email: "",
   password: "",
-  confirmPsw: "",
-  role: IUserRole.USER,
-  status: IUserStatus.ACTIVE
+  confirmPsw: ""
 };
 
 const validatePasswordRegEx =

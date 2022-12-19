@@ -5,6 +5,7 @@ import { notification } from "antd";
 import { SERVICE_API } from "constants/path.api";
 import { getCookie } from "helpers/storage";
 import { i18nTranslate } from "helpers/language";
+import { authKeyStorage } from "constants/store.key";
 
 export const requestAPI = axios.create({
   baseURL: SERVICE_API,
@@ -20,7 +21,7 @@ requestAPI.interceptors.request.use(
 );
 
 requestAPI.interceptors.response.use(
-  (response: AxiosResponse<any>) => response.data,
+  (response: AxiosResponse<any>) => response,
   async (exception) => {
     if (
       exception.response.status === 404 ||
@@ -45,7 +46,7 @@ export const requestHeader = axios.create({
 requestHeader.interceptors.request.use(
   (request: AxiosRequestConfig) => {
     request.timeoutErrorMessage = i18nTranslate("common:expired_token");
-    const token = getCookie("access-token");
+    const token = getCookie(authKeyStorage.ACCESS_TOKEN);
     request.headers = {
       Authorization: `Bearer ${token as string}`
     };
@@ -55,7 +56,7 @@ requestHeader.interceptors.request.use(
 );
 
 requestHeader.interceptors.response.use(
-  (response: AxiosResponse<any>) => response.data,
+  (response: AxiosResponse<any>) => response,
   async (exception) => {
     if (
       exception.response.status === 404 ||

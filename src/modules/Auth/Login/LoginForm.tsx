@@ -25,7 +25,7 @@ const LoginForm = () => {
 
   const handleNavigateToAuthModule = (mode: "sign-up" | "forgot-psw") => {
     if (mode === "sign-up") dispatch(showSignUpFormModal());
-    dispatch(showForgotPswFormModal());
+    else dispatch(showForgotPswFormModal());
   };
 
   const {

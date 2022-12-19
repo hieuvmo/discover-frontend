@@ -21,6 +21,11 @@ export interface ISignUp {
   status?: IUserStatus;
 }
 
+export interface ISignUpResponse {
+  message: string;
+  success: boolean;
+}
+
 export interface ILogin extends Pick<ISignUp, "email" | "password"> {
   rememberPsw?: boolean;
 }

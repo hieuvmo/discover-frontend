@@ -3,6 +3,7 @@
   "laptop": "Laptop",
   "no_data": "No data",
   "result": "result",
+  "loading": "Loading",
   "system_error": "The system is having an error. Please try again later",
   "expired_token": "Login session expired. Please log in again"
 }

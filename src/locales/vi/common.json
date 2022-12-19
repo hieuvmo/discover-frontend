@@ -3,6 +3,7 @@
   "laptop": "Laptop",
   "no_data": "Không có dữ liệu",
   "result": "kết quả",
+  "loading": "Đang tải",
   "system_error": "Hệ thống đang gặp lỗi. Vui lòng thử lại sau",
   "expired_token": "Phiên đăng nhập hết hạn. Vui lòng đăng nhập lại"
 }
