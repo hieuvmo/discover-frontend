@@ -12,7 +12,8 @@ export const authAPIs = {
   LOGIN: `${endPointAPIs.AUTH}/log-in`,
   LOGOUT: `${endPointAPIs.AUTH}/log-out`,
   FORGOT_PASSWORD: `${endPointAPIs.AUTH}/password-recover`,
-  CHANGE_PASSWORD: `${endPointAPIs.AUTH}/change-password`
+  CHANGE_PASSWORD: `${endPointAPIs.AUTH}/change-password`,
+  GEN_NEW_TOKEN: `${endPointAPIs.AUTH}/gen-new-token`
 };
 
 export const laptopAPIs = {

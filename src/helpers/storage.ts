@@ -32,11 +32,3 @@ export const getCookie = (name: string) => Cookies.get(name);
 export const destroyCookie = (key: string, option?: CookieAttributes) => {
   Cookies.remove(key, option || undefined);
 };
-
-export const getRefreshToken = () => {
-  const refreshToken = getCookie("refresh-token");
-  if (refreshToken) {
-    return refreshToken.split(" ")[1];
-  }
-  return null;
-};

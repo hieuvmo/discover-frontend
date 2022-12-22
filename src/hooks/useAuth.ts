@@ -1,8 +1,7 @@
-import { authKeyStorage } from "constants/store.key";
-import { getCookie } from "helpers/storage";
+import { getAccessTokenFromCookie } from "helpers/token";
 
 function useAuth() {
-  const token = getCookie(authKeyStorage.ACCESS_TOKEN);
+  const token = getAccessTokenFromCookie();
 
   return !!token;
 }

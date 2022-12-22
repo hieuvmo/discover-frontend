@@ -3,11 +3,18 @@ import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 import { notification } from "antd";
 
 import { SERVICE_API } from "constants/path.api";
-import { getCookie } from "helpers/storage";
 import { i18nTranslate } from "helpers/language";
-import { authKeyStorage } from "constants/store.key";
+import {
+  getAccessTokenFromCookie,
+  getRefreshTokenFromCookie,
+  setAccessTokenToCookie,
+  setRefreshTokenToCookie
+} from "helpers/token";
+import { resetLoginData, showLoginFormModal } from "redux/features/auth.slice";
+import { dispatchFunction } from "redux/store";
+import { authServices } from "./auth.service";
 
-export const requestAPI = axios.create({
+export const unauthorizedRequest = axios.create({
   baseURL: SERVICE_API,
   timeout: 15000,
   headers: {
@@ -15,12 +22,12 @@ export const requestAPI = axios.create({
   }
 });
 
-requestAPI.interceptors.request.use(
+unauthorizedRequest.interceptors.request.use(
   (request: AxiosRequestConfig) => request,
   async (exception) => await Promise.reject(exception)
 );
 
-requestAPI.interceptors.response.use(
+unauthorizedRequest.interceptors.response.use(
   (response: AxiosResponse<any>) => response,
   async (exception) => {
     if (
@@ -35,7 +42,7 @@ requestAPI.interceptors.response.use(
   }
 );
 
-export const requestHeader = axios.create({
+export const authorizedRequest = axios.create({
   baseURL: SERVICE_API,
   timeout: 15000,
   headers: {
@@ -43,19 +50,88 @@ export const requestHeader = axios.create({
   }
 });
 
-requestHeader.interceptors.request.use(
+authorizedRequest.interceptors.request.use(
   (request: AxiosRequestConfig) => {
     request.timeoutErrorMessage = i18nTranslate("common:expired_token");
-    const token = getCookie(authKeyStorage.ACCESS_TOKEN);
-    request.headers = {
-      Authorization: `Bearer ${token as string}`
-    };
+    const accessToken = getAccessTokenFromCookie();
+    if (request.headers)
+      request.headers.Authorization = `Bearer ${accessToken}`;
     return request;
   },
   async (exception) => await Promise.reject(exception)
 );
 
-requestHeader.interceptors.response.use(
+authorizedRequest.interceptors.response.use(
+  (response: AxiosResponse<any>) => response,
+  async (exception) => {
+    const originalRequest = exception.config;
+    const accessToken = getAccessTokenFromCookie();
+    const refreshToken = getRefreshTokenFromCookie();
+
+    if (
+      exception.response.status === 404 ||
+      exception.response.status === 500
+    ) {
+      notification.error({
+        message: i18nTranslate("common:system_error")
+      });
+    }
+
+    // expired accessToken and valid refreshToken
+    if (exception.response.status === 401 && !accessToken && refreshToken) {
+      try {
+        const response = await authServices.genNewToken();
+        const newAccessToken = response.accessToken;
+        const newRefreshToken = response.refreshToken;
+
+        setAccessTokenToCookie(newAccessToken);
+        setRefreshTokenToCookie(newRefreshToken);
+
+        originalRequest.headers.Authorization = `Bearer ${newAccessToken}`;
+
+        // after gen new token => run before request
+        return authorizedRequest(originalRequest);
+      } catch (error) {
+        notification.error({
+          message: i18nTranslate("common:system_error")
+        });
+      }
+    }
+
+    // expired accessToken and expired refreshToken
+    if (exception.response.status === 401 && !accessToken && !refreshToken) {
+      dispatchFunction(resetLoginData());
+      dispatchFunction(showLoginFormModal());
+      notification.error({
+        message: i18nTranslate("common:expired_token")
+      });
+    }
+
+    return await Promise.reject(exception.response.data);
+  }
+);
+
+// only use in api gen new token
+export const refreshTokenRequest = axios.create({
+  baseURL: SERVICE_API,
+  timeout: 15000,
+  headers: {
+    "Content-Type": "application/json; charset=utf-8"
+  }
+});
+
+refreshTokenRequest.interceptors.request.use(
+  (request: AxiosRequestConfig) => {
+    request.timeoutErrorMessage = i18nTranslate("common:expired_token");
+    const refreshToken = getRefreshTokenFromCookie();
+    if (request.headers)
+      request.headers.Authorization = `Bearer ${refreshToken}`;
+    return request;
+  },
+  async (exception) => await Promise.reject(exception)
+);
+
+refreshTokenRequest.interceptors.response.use(
   (response: AxiosResponse<any>) => response,
   async (exception) => {
     if (

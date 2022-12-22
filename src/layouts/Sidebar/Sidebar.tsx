@@ -1,16 +1,14 @@
 import clsx from "clsx";
-import { forwardRef, memo } from "react";
+import { forwardRef, memo, useCallback } from "react";
 import { useTranslation } from "react-i18next";
 import { NavLink, useLocation } from "react-router-dom";
 
-import { Logo, LogoutIcon } from "icons";
+import { LogoutIcon } from "icons";
 import { routerList } from "routers/router.routes";
 import { IRouter } from "types/router.model";
-
-const rawData = {
-  name: "Viết Minh Hiếu",
-  lastLogin: "09:41 2022-07-06"
-};
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { RootState } from "redux/store";
+import { logoutActionRequest } from "redux/features/auth.slice";
 
 interface SideBarProps {
   navVisible: boolean;
@@ -21,6 +19,56 @@ const Sidebar = forwardRef<HTMLElement, SideBarProps>(
   ({ navVisible, clickCloseSidebar }, ref) => {
     const location = useLocation();
     const { t } = useTranslation();
+    const dispatch = useAppDispatch();
+    const { profile, userInfo, loading } = useAppSelector(
+      (state: RootState) => state.auth
+    );
+
+    const renderProfile = useCallback(() => {
+      if (profile && userInfo) {
+        return (
+          <div className="px-4 py-6">
+            <div className="h-20 w-20 mx-auto flex justify-center items-center border border-solid border-[#E0E0E0] rounded-[50%]">
+              <img
+                src={profile?.avatar}
+                alt={userInfo?.email}
+                className="rounded-[50%]"
+              />
+            </div>
+            <div>
+              <h4 className="text-xl !my-3 text-center text-[#424242]">
+                {profile.firstName
+                  ? `${profile.firstName} ${profile.lastName}`
+                  : userInfo.email}
+              </h4>
+            </div>
+          </div>
+        );
+      }
+    }, [profile, userInfo]);
+
+    const renderLogOutBtn = useCallback(() => {
+      const handleClickLogoutBtn = () => {
+        dispatch(logoutActionRequest());
+      };
+
+      if (profile && userInfo) {
+        return (
+          <div
+            className={clsx(
+              "flex justify-center items-center absolute bottom-9 w-[296px] cursor-pointer select-none",
+              loading ? "cursor-not-allowed" : "cursor-pointer"
+            )}
+            onClick={handleClickLogoutBtn}
+          >
+            <LogoutIcon />
+            <div className="text-[#616161] font-semibold ml-2.5">
+              {t("auth:log_out")}
+            </div>
+          </div>
+        );
+      }
+    }, [dispatch, loading, profile, t, userInfo]);
 
     return (
       <aside
@@ -34,19 +82,7 @@ const Sidebar = forwardRef<HTMLElement, SideBarProps>(
         )}
         ref={ref}
       >
-        <div className="px-4 py-6">
-          <div className="h-20 w-20 mx-auto flex justify-center items-center border border-solid border-[#E0E0E0] rounded-[50%]">
-            <Logo />
-          </div>
-          <div>
-            <h4 className="text-xl !my-3 text-center text-[#424242]">
-              {rawData.name}
-            </h4>
-            <p className="text-xs !my-3 text-center text-[#474D57]">
-              Đăng nhập lần cuối: <span>09:41 2022-07-06</span>
-            </p>
-          </div>
-        </div>
+        {renderProfile()}
 
         <div className="items-center block w-auto grow basis-full">
           <ul className="flex flex-col pl-0 mb-0">
@@ -87,12 +123,7 @@ const Sidebar = forwardRef<HTMLElement, SideBarProps>(
           </ul>
         </div>
 
-        <div className="flex justify-center items-center absolute bottom-9 w-[296px] sm:w-60 cursor-pointer">
-          <LogoutIcon />
-          <div className="text-[#616161] font-semibold ml-2.5">
-            {t("auth:log_out")}
-          </div>
-        </div>
+        {renderLogOutBtn()}
       </aside>
     );
   }
