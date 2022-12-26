@@ -71,3 +71,10 @@ export type INewTokenResponse = Pick<
   ILoginResponse,
   "accessToken" | "refreshToken"
 >;
+
+export interface IChangePsw {
+  userId?: string;
+  oldPassword: string;
+  newPassword: string;
+  confirmNewPsw?: string;
+}

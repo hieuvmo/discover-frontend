@@ -25,13 +25,13 @@ const CommonBreadcrumb = ({
   const renderBreadcrumbItem = (breadcrumbItem: ListBreadcrumbProps) => {
     if (breadcrumbItem.linkTo) {
       return (
-        <Breadcrumb.Item>
+        <Breadcrumb.Item key={breadcrumbItem.name}>
           <Link to={breadcrumbItem.linkTo}>{breadcrumbItem.name}</Link>
         </Breadcrumb.Item>
       );
     }
     return (
-      <Breadcrumb.Item>
+      <Breadcrumb.Item key={breadcrumbItem.name}>
         <DisabledBreadcrumb>{breadcrumbItem.name}</DisabledBreadcrumb>
       </Breadcrumb.Item>
     );

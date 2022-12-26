@@ -68,7 +68,7 @@ const NavUser = () => {
           <img
             src={profile.avatar}
             alt={userInfo.email}
-            className="rounded-[50%]"
+            className="rounded-[50%] w-9 h-9"
           />
         </div>
       )}
