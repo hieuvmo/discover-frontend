@@ -5,3 +5,4 @@ export * from "./Image";
 export * from "./Button";
 export * from "./Input/TextField";
 export * from "./Input/PasswordField";
+export * from "./Breadcrumb";

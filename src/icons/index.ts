@@ -12,3 +12,4 @@ export { default as SearchIcon } from "./SearchIcon";
 export { default as UserIcon } from "./UserIcon";
 export { default as LockIcon } from "./LockIcon";
 export { default as ProfileIcon } from "./ProfileIcon";
+export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
