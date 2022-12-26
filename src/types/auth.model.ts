@@ -1,3 +1,5 @@
+import { IProfile } from "./profile.model";
+
 /* eslint-disable no-unused-vars */
 export enum IUserRole {
   ADMIN = "Admin",
@@ -20,15 +22,6 @@ export interface IUserInfo {
   role: string;
   status: string;
   token: string;
-}
-
-export interface IProfile {
-  _id: string;
-  userId: string;
-  firstName: string;
-  lastName: string;
-  updatedAt: string;
-  avatar: string;
 }
 
 export interface ISignUp {

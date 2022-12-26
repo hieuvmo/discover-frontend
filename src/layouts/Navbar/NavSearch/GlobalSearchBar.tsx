@@ -75,7 +75,7 @@ const GlobalSearchBar = () => {
         )
       }
     ];
-  }, [filterText, dispatch, laptopList, navigate, t]);
+  }, [laptopList, loading, t, navigate, dispatch, filterText]);
 
   useEffect(() => {
     dispatch(getLaptopListRequest());
