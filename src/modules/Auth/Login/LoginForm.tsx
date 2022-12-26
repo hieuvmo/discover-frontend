@@ -1,17 +1,21 @@
+import { useCallback } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useTranslation } from "react-i18next";
-import { Checkbox } from "antd";
+import { Checkbox, message as messageAntd } from "antd";
 
 import { CommonButton, PasswordField, TextField } from "components";
 import { ILogin } from "types/auth.model";
-import { useAppDispatch } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import {
+  loginActionRequest,
   showForgotPswFormModal,
   showSignUpFormModal
 } from "redux/features/auth.slice";
+import { RootState } from "redux/store";
 import { initialLoginFormValues, loginFormSchema } from "./Login.constants";
 import {
+  APIErrorMessage,
   ForgotPswText,
   LoginTitle,
   NotHaveAccount,
@@ -22,10 +26,13 @@ import {
 const LoginForm = () => {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
+  const { loading, message, success } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   const handleNavigateToAuthModule = (mode: "sign-up" | "forgot-psw") => {
     if (mode === "sign-up") dispatch(showSignUpFormModal());
-    dispatch(showForgotPswFormModal());
+    else dispatch(showForgotPswFormModal());
   };
 
   const {
@@ -38,15 +45,29 @@ const LoginForm = () => {
     resolver: yupResolver(loginFormSchema)
   });
 
-  const onSubmit = (data: ILogin) => {
-    console.log("data", data);
+  const renderErrorMessage = useCallback(() => {
+    if (!success) {
+      return <APIErrorMessage>{message}</APIErrorMessage>;
+    }
+    return <div />;
+  }, [success, message]);
+
+  const handleSubmitLoginForm = (data: ILogin) => {
+    dispatch(loginActionRequest(data));
+
+    if (success) {
+      messageAntd.open({
+        type: "success",
+        content: message
+      });
+    }
   };
 
   return (
     <>
       <LoginTitle>{t("auth:log_in")}</LoginTitle>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
+      <form onSubmit={handleSubmit(handleSubmitLoginForm)}>
         <Controller
           name="email"
           control={control}
@@ -98,10 +119,14 @@ const LoginForm = () => {
           </ForgotPswText>
         </PasswordWrapper>
 
+        {renderErrorMessage()}
+
         <CommonButton
           htmlType="submit"
           content={t("auth:log_in")}
           className="w-full"
+          loading={loading}
+          disabled={loading}
         />
       </form>
 

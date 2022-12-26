@@ -19,7 +19,7 @@ const laptopPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
 const authPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   key: "auth",
   storage,
-  blacklist: ["modalMode", "showModal"]
+  blacklist: ["modalMode", "showModal", "message", "success"]
 };
 
 export default {

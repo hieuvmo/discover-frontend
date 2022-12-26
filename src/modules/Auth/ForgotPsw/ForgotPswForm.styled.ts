@@ -21,3 +21,13 @@ export const ForgotPswDescription = styled.h1`
   font-weight: 500;
   margin-bottom: 1.5rem;
 `;
+
+export const UnderConstruction = styled.div`
+  margin-bottom: 1.25rem;
+  background-color: #ff4d4f;
+  padding: 0.5rem;
+  text-align: center;
+  font-weight: 500;
+  color: white;
+  border-radius: 0.5rem;
+`;

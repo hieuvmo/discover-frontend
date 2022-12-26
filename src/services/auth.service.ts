@@ -1,10 +1,36 @@
 import { authAPIs } from "constants/path.api";
-import { ILogin } from "types/auth.model";
-import { requestAPI } from "./request";
+import {
+  ILogin,
+  ILoginResponse,
+  ILogoutResponse,
+  INewTokenResponse,
+  ISignUp,
+  ISignUpResponse
+} from "types/auth.model";
+import {
+  unauthorizedRequest,
+  authorizedRequest,
+  refreshTokenRequest
+} from "./request";
 
 export const authServices = {
-  async login(param: ILogin) {
-    const response = await requestAPI.post(authAPIs.LOGIN, param);
-    return response;
+  async signUp(params: ISignUp): Promise<ISignUpResponse> {
+    const { data } = await unauthorizedRequest.post(authAPIs.SIGNUP, params);
+    return data;
+  },
+
+  async login(param: ILogin): Promise<ILoginResponse> {
+    const { data } = await unauthorizedRequest.post(authAPIs.LOGIN, param);
+    return data;
+  },
+
+  async genNewToken(): Promise<INewTokenResponse> {
+    const { data } = await refreshTokenRequest.post(authAPIs.GEN_NEW_TOKEN);
+    return data;
+  },
+
+  async logout(): Promise<ILogoutResponse> {
+    const { data } = await authorizedRequest.post(authAPIs.LOGOUT);
+    return data;
   }
 };

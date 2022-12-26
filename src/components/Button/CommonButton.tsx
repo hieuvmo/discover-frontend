@@ -12,6 +12,7 @@ import Button from "antd/es/button";
 import LoadingOutlined from "@ant-design/icons/lib/icons/LoadingOutlined";
 import { ButtonProps } from "antd/lib/button";
 import clsx from "clsx";
+import { useTranslation } from "react-i18next";
 
 import { ColorPalette } from "constants/color";
 import {
@@ -52,7 +53,10 @@ const CommonButton = forwardRef<HTMLElement, CommonButtonProps>(
       disableConfirm = false,
       ...other
     } = props;
+
     const btnId = useId();
+    const { t } = useTranslation();
+
     const handleOnClick = useCallback(
       (event: MouseEvent<HTMLDivElement>) => {
         event.stopPropagation();
@@ -84,7 +88,7 @@ const CommonButton = forwardRef<HTMLElement, CommonButtonProps>(
             className={loadingClassName}
           >
             <LoadingOutlined />
-            <p>Đang tải</p>
+            <p>{t("common:loading")}</p>
           </LoadingContainer>
         ) : (
           <div onKeyDown={(e) => onKeyDown?.(e)} key={`button-${btnId}`}>

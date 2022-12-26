@@ -5,6 +5,8 @@ import { useNavigate } from "react-router-dom";
 import { LanguageSelector } from "components";
 import { Logo, MenuIcon } from "icons";
 import { routerPaths } from "routers/router.paths";
+import { useAppSelector } from "hooks/useRedux";
+import { RootState } from "redux/store";
 import NavUser from "./NavUser/NavUser";
 import NavCart from "./NavCart/NavCart";
 import NavSearch from "./NavSearch/NavSearch";
@@ -16,8 +18,14 @@ interface NavBarProps {
 
 const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
   const navigate = useNavigate();
+  const { userInfo } = useAppSelector((state: RootState) => state.auth);
 
   const navigateToHomePage = () => navigate(routerPaths.HOME);
+
+  const renderNavSearchAndUser = () => {
+    if (userInfo) return <NavCart />;
+    return <NavUser />;
+  };
 
   return (
     <nav
@@ -40,8 +48,7 @@ const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
       <div className="flex items-center gap-6">
         <LanguageSelector />
         <NavSearch />
-        <NavCart />
-        <NavUser />
+        {renderNavSearchAndUser()}
       </div>
     </nav>
   );

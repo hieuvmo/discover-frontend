@@ -13,7 +13,8 @@ import {
 import {
   BackToLoginText,
   ForgotPswDescription,
-  ForgotPswTitle
+  ForgotPswTitle,
+  UnderConstruction
 } from "./ForgotPswForm.styled";
 
 const ForgotPswForm = () => {
@@ -43,6 +44,8 @@ const ForgotPswForm = () => {
       <ForgotPswTitle>{t("auth:forgot_psw")}</ForgotPswTitle>
 
       <ForgotPswDescription>{t("auth:enter_email")}</ForgotPswDescription>
+
+      <UnderConstruction>{t("auth:under_construction")}</UnderConstruction>
 
       <form onSubmit={handleSubmit(onSubmit)}>
         <Controller
