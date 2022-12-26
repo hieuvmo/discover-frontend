@@ -1,6 +1,8 @@
 {
   "home": "Home",
   "laptop": "Laptop",
+  "change_psw": "Change password",
+  "profile": "User profile",
   "no_data": "No data",
   "result": "result",
   "loading": "Loading",

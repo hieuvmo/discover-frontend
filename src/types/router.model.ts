@@ -9,4 +9,5 @@ export interface IRouter extends IChildrenRouter {
   name: string;
   icon?: ReactNode;
   children?: IChildrenRouter[];
+  needLogin?: boolean;
 }

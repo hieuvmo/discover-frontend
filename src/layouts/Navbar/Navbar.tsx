@@ -10,6 +10,7 @@ import { RootState } from "redux/store";
 import NavUser from "./NavUser/NavUser";
 import NavCart from "./NavCart/NavCart";
 import NavSearch from "./NavSearch/NavSearch";
+import NavLoggerUser from "./NavUser/NavLoggerUser";
 
 interface NavBarProps {
   navVisible: boolean;
@@ -23,7 +24,13 @@ const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
   const navigateToHomePage = () => navigate(routerPaths.HOME);
 
   const renderNavSearchAndUser = () => {
-    if (userInfo) return <NavCart />;
+    if (userInfo)
+      return (
+        <>
+          <NavCart />
+          <NavLoggerUser />
+        </>
+      );
     return <NavUser />;
   };
 
