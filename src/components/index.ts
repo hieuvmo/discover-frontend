@@ -6,3 +6,6 @@ export * from "./Button";
 export * from "./Input/TextField";
 export * from "./Input/PasswordField";
 export * from "./Breadcrumb";
+export * from "./DatePicker";
+export * from "./Select";
+export * from "./Steps";
