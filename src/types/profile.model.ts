@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 export interface IProvince {
   province_id: string;
   province_name: string;
@@ -25,9 +26,24 @@ export interface IProfile {
   firstName: string;
   lastName: string;
   dob: string;
-  province: string;
-  district: string;
-  ward: string;
+  province: string | null;
+  district: string | null;
+  ward: string | null;
   address: string;
   updatedAt?: string;
+}
+
+export type IPersonalInfo = Pick<IProfile, "firstName" | "lastName" | "dob">;
+
+export type IPersonalAddress = Pick<
+  IProfile,
+  "province" | "district" | "ward" | "address"
+>;
+
+export enum ProfileTabs {
+  PERSONAL_INFO = "personal",
+  PERSONAL_ADDRESS = "address",
+  CHANGE_PSW = "change_psw",
+  ORDER = "order",
+  FAVORITE = "favorite"
 }

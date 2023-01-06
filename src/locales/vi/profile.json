@@ -1,0 +1,19 @@
+{
+  "dob": "Ngày sinh",
+  "dob_placeholder": "Chọn ngày sinh",
+  "update": "Cập nhật",
+  "province": "Thành phố/Tỉnh thành",
+  "province_placeholder": "Chọn thành phố/tỉnh thành",
+  "district": "Quận/Huyện",
+  "district_placeholder": "Chọn quận/huyện",
+  "ward": "Phường/Xã",
+  "ward_placeholder": "Chọn phường/xã",
+  "house_no": "Số nhà",
+  "house_no_placeholder": "Nhập số nhà",
+  "personal": "Cá nhân",
+  "address": "Địa chỉ",
+  "participating": "Tham gia",
+  "change_psw": "Đổi mật khẩu",
+  "order": "Đơn hàng",
+  "favorite": "Yêu thích"
+}

@@ -46,7 +46,7 @@ const AppLayout = () => {
       >
         <div
           className={clsx(
-            "w-full p-4 sm:!p-6 mx-auto h-[calc(100vh-44px)] sm:h-[calc(100vh-80px)] overflow-auto",
+            "w-full p-4 sm:!p-6 mx-auto h-[calc(100vh-44px)] sm:h-[calc(100vh-80px)] overflow-auto bg-[#f9f9f9]",
             navVisible && "hidden sm:!block"
           )}
         >

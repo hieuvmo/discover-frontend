@@ -7,13 +7,14 @@ import { IChangePsw } from "types/auth.model";
 import { useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import { CommonButton, PasswordField } from "components";
+import { ProfileTitle } from "modules/Profile/Profile.styled";
 import {
   changePswFormSchema,
   initialChangePswFormValues
 } from "./ChangePsw.constants";
 import { APIErrorMessage } from "./ChangePsw.styled";
 
-const ChangePsw = () => {
+const ChangePswForm = () => {
   const { t } = useTranslation();
   const { loading, message, success } = useAppSelector(
     (state: RootState) => state.auth
@@ -41,6 +42,8 @@ const ChangePsw = () => {
 
   return (
     <form onSubmit={handleSubmit(handleSubmitChangePswForm)}>
+      <ProfileTitle>{t("profile:change_psw")}</ProfileTitle>
+
       <Controller
         name="oldPassword"
         control={control}
@@ -101,4 +104,4 @@ const ChangePsw = () => {
   );
 };
 
-export default ChangePsw;
+export default ChangePswForm;

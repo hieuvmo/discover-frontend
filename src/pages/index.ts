@@ -1,4 +1,3 @@
-export { default as ChangePswPage } from "./ChangePswPage";
 export { default as HomePage } from "./HomePage";
 export { default as LaptopDetailPage } from "./LaptopDetailPage";
 export { default as LaptopListPage } from "./LaptopListPage";
