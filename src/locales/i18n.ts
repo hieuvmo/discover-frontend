@@ -9,6 +9,8 @@ import authEn from "./en/auth.json";
 import authVi from "./vi/auth.json";
 import laptopEn from "./en/laptop.json";
 import laptopVi from "./vi/laptop.json";
+import profileEn from "./en/profile.json";
+import profileVi from "./vi/profile.json";
 
 const currentLanguage = getLocalStorageItem("i18nextLng") || "vi";
 
@@ -17,8 +19,18 @@ i18n
   .use(LanguageDetector)
   .init({
     resources: {
-      en: { common: commonEn, auth: authEn, laptop: laptopEn },
-      vi: { common: commonVi, auth: authVi, laptop: laptopVi }
+      en: {
+        common: commonEn,
+        auth: authEn,
+        laptop: laptopEn,
+        profile: profileEn
+      },
+      vi: {
+        common: commonVi,
+        auth: authVi,
+        laptop: laptopVi,
+        profile: profileVi
+      }
     },
     lng: currentLanguage,
     fallbackLng: "vi",

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 export const SERVICE_API = "http://localhost:5000";
 
 const endPointAPIs = {
@@ -5,6 +6,13 @@ const endPointAPIs = {
   LAPTOP: "/api/laptop",
   RECEIPT: "/api/receipt",
   PROFILE: "/api/profile"
+};
+
+const thirdPartyAPIs = {
+  PORT: "https://vapi.vnappmob.com/api",
+  PROVINCE: "/province",
+  DISTRICT: "/district",
+  WARD: "/ward"
 };
 
 export const authAPIs = {
@@ -18,4 +26,12 @@ export const authAPIs = {
 
 export const laptopAPIs = {
   LIST: `${endPointAPIs.LAPTOP}`
+};
+
+export const profileAPIs = {
+  PROVINCE: `${thirdPartyAPIs.PORT}${thirdPartyAPIs.PROVINCE}`,
+  DISTRICT: (provinceId: string) =>
+    `${thirdPartyAPIs.PORT}${thirdPartyAPIs.PROVINCE}${thirdPartyAPIs.DISTRICT}/${provinceId}`,
+  WARD: (districtId: string) =>
+    `${thirdPartyAPIs.PORT}${thirdPartyAPIs.PROVINCE}${thirdPartyAPIs.WARD}/${districtId}`
 };

@@ -1,21 +1,21 @@
 import { lazy } from "react";
 
-import { HomeIcon, LaptopIcon } from "icons";
+import { HomeIcon, LaptopIcon, ProfileIcon } from "icons";
 import { IRouter } from "types/router.model";
 import { routerPaths } from "./router.paths";
 
-const HomePage = lazy(() => import("pages/Home/HomePage"));
-const LaptopListPage = lazy(() => import("pages/LaptopList/LaptopListPage"));
-const LaptopDetailPage = lazy(
-  () => import("pages/LaptopDetail/LaptopDetailPage")
-);
+const HomePage = lazy(() => import("pages/HomePage"));
+const LaptopListPage = lazy(() => import("pages/LaptopListPage"));
+const LaptopDetailPage = lazy(() => import("pages/LaptopDetailPage"));
+const ProfilePage = lazy(() => import("pages/ProfilePage"));
 
 export const routerList: IRouter[] = [
   {
     name: "home",
     path: routerPaths.HOME,
     element: <HomePage />,
-    icon: <HomeIcon width={16} height={16} fill="#7F56D9" />
+    icon: <HomeIcon width={16} height={16} fill="#7F56D9" />,
+    needLogin: false
   },
   {
     name: "laptop",
@@ -27,6 +27,14 @@ export const routerList: IRouter[] = [
         path: routerPaths.LAPTOP_DETAIL,
         element: <LaptopDetailPage />
       }
-    ]
+    ],
+    needLogin: false
+  },
+  {
+    name: "profile",
+    path: routerPaths.PROFILE,
+    element: <ProfilePage />,
+    icon: <ProfileIcon width={16} height={16} fill="#7F56D9" />,
+    needLogin: true
   }
 ];

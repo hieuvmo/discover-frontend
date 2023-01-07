@@ -4,11 +4,11 @@ import {
   ILogin,
   ILoginResponse,
   ILogoutResponse,
-  IProfile,
   ISignUp,
   ISignUpResponse,
   IUserInfo
 } from "types/auth.model";
+import { IProfile } from "types/profile.model";
 
 export interface AuthState {
   modalMode: "login" | "sign-up" | "forgot-psw" | null;

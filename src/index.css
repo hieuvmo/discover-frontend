@@ -2,10 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-.ant-btn-primary {
-  background-color: #7f56d9 !important;
-}
-
 /* Scrollbar Styling */
 ::-webkit-scrollbar {
   width: 5px;

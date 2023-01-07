@@ -3,8 +3,8 @@ import { ILaptop } from "types/laptop.model";
 import { unauthorizedRequest } from "./request";
 
 export const laptopServices = {
-  async getListLaptop(): Promise<ILaptop> {
+  async getListLaptop(): Promise<ILaptop[]> {
     const { data } = await unauthorizedRequest.get(laptopAPIs.LIST);
-    return data;
+    return data.data;
   }
 };

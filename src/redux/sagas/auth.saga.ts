@@ -117,7 +117,9 @@ function* logoutActionSaga() {
 }
 
 export default function* authSaga() {
-  yield all([takeLatest(signUpActionRequest.type, signUpActionSaga)]);
-  yield all([takeLatest(loginActionRequest.type, loginActionSaga)]);
-  yield all([takeLatest(logoutActionRequest.type, logoutActionSaga)]);
+  yield all([
+    takeLatest(signUpActionRequest.type, signUpActionSaga),
+    takeLatest(loginActionRequest.type, loginActionSaga),
+    takeLatest(logoutActionRequest.type, logoutActionSaga)
+  ]);
 }

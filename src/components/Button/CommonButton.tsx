@@ -20,6 +20,7 @@ import {
   PrefixContainer,
   SuffixContainer
 } from "./Button.styled";
+import "./Button.style.css";
 
 interface CommonButtonProps extends ButtonProps {
   content: ReactNode;

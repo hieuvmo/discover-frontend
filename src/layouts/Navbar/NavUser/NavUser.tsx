@@ -28,7 +28,7 @@ const NavUser = () => {
     dispatch(unShowAuthModal());
   };
 
-  const navSearchList: MenuProps["items"] = [
+  const navUserList: MenuProps["items"] = [
     {
       key: String(t("auth:log_in")),
       label: (
@@ -57,7 +57,7 @@ const NavUser = () => {
 
   return (
     <>
-      <Dropdown menu={{ items: navSearchList }} trigger={["click"]}>
+      <Dropdown menu={{ items: navUserList }} trigger={["click"]}>
         <div className="bg-[#f5f5f5] h-12 w-12 rounded-[50%] flex items-center hover:cursor-pointer">
           <UserIcon width={48} />
         </div>

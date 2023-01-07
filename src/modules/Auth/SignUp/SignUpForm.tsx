@@ -182,8 +182,6 @@ const SignUpForm = () => {
         {t("auth:have_account")}
         <span onClick={handleNavigateToLogin}>{t("auth:log_in")}</span>
       </HaveAccount>
-
-      {/* {success && popUpSuccessfulSignUp()} */}
     </>
   );
 };

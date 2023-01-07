@@ -1,0 +1,19 @@
+{
+  "dob": "Date of birth",
+  "dob_placeholder": "Select date of birth",
+  "update": "Update",
+  "province": "Province",
+  "province_placeholder": "Select province",
+  "district": "District",
+  "district_placeholder": "Select district",
+  "ward": "Ward",
+  "ward_placeholder": "Select ward",
+  "house_no": "House No",
+  "house_no_placeholder": "Enter house no",
+  "personal": "Personal",
+  "address": "Address",
+  "participating": "Participating",
+  "change_psw": "Change password",
+  "order": "Order",
+  "favorite": "Favorite"
+}
