@@ -1,4 +1,12 @@
 {
   "laptop_list": "Laptop list",
-  "laptop_list_error": "An error occurred while retrieving the laptop list data"
+  "laptop_list_error": "An error occurred while retrieving the laptop list data",
+  "search_found": "Found",
+  "search_result": "results for",
+  "search_placeholder": "Search laptop",
+  "brand": "Brand",
+  "all": "All",
+  "add_to_cart": "Add to cart",
+  "add_to_favorite": "Add to favorite",
+  "login_to_use": "You need login to use this function"
 }

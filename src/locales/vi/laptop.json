@@ -1,4 +1,12 @@
 {
   "laptop_list": "Danh sách laptop",
-  "laptop_list_error": "Có lỗi xảy ra khi lấy dữ liệu danh sách laptop"
+  "laptop_list_error": "Có lỗi xảy ra khi lấy dữ liệu danh sách laptop",
+  "search_found": "Tìm thấy",
+  "search_result": "kết quả cho",
+  "search_placeholder": "Tìm kiếm laptop",
+  "brand": "Hãng",
+  "all": "Tất cả",
+  "add_to_cart": "Thêm vào giỏ hàng",
+  "add_to_favorite": "Thêm vào yêu thích",
+  "login_to_use": "Bạn cần đăng nhập để sử dụng chức năng này"
 }
