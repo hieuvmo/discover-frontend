@@ -58,7 +58,7 @@ const GlobalSearchBar = () => {
             {laptop.productName.split("(")[0]}
           </div>
         ),
-        icon: <img src={laptop.productImg[0]} alt="" width={20} />
+        icon: <img src={laptop.productImg[2]} alt="" width={20} />
       }));
     }
     return [

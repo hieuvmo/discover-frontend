@@ -82,7 +82,7 @@ const Sidebar = forwardRef<HTMLElement, SideBarProps>(
         return (
           <div
             className={clsx(
-              "flex justify-center items-center absolute bottom-9 w-[296px] cursor-pointer select-none",
+              "flex justify-center items-center absolute bottom-9 w-[249px] cursor-pointer select-none",
               loading ? "cursor-not-allowed" : "cursor-pointer"
             )}
             onClick={handleClickLogoutBtn}
@@ -99,7 +99,7 @@ const Sidebar = forwardRef<HTMLElement, SideBarProps>(
     return (
       <aside
         className={clsx(
-          `max-w-[297px] z-50 fixed inset-y-0 block mt-0 sm:!mt-20 border-r-[1px] border-solid border-r-[#E0E0E0]
+          `max-w-[250px] z-50 fixed inset-y-0 block mt-0 sm:!mt-20 border-r-[1px] border-solid border-r-[#E0E0E0]
           w-full -translate-x-full flex-wrap items-center justify-between overflow-y-auto
         bg-white p-0 antialiased transition-transform duration-200 max-h-screen overflow-auto`,
           navVisible
