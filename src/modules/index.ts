@@ -4,3 +4,4 @@ export * from "./Auth/SignUp";
 export * from "./Auth/ForgotPsw";
 export * from "./Auth/ChangePsw";
 export * from "./Profile";
+export * from "./LaptopList";

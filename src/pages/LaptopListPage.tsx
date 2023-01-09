@@ -1,5 +1,7 @@
+import { LaptopList } from "modules";
+
 const LaptopListPage = () => {
-  return <div>LaptopList</div>;
+  return <LaptopList />;
 };
 
 export default LaptopListPage;

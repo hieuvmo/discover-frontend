@@ -14,3 +14,5 @@ export { default as LockIcon } from "./LockIcon";
 export { default as ProfileIcon } from "./ProfileIcon";
 export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export { default as CameraIcon } from "./CameraIcon";
+export { default as MenuDotsIcon } from "./MenuDotsIcon";
+export { default as HeartIcon } from "./HeartIcon";

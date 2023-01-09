@@ -41,7 +41,7 @@ const AppLayout = () => {
       <main
         className={clsx(
           "ease-soft-in-out  relative h-screen transition-all duration-200 overflow-hidden bg-white",
-          navVisible ? "!bg-[rgba(0,0,0,.2)] sm:!bg-white ml-[296px]" : "ml-0"
+          navVisible ? "!bg-[rgba(0,0,0,.2)] sm:!bg-white ml-[250px]" : "ml-0"
         )}
       >
         <div
