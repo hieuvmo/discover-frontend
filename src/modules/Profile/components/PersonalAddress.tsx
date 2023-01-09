@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { DefaultOptionType } from "antd/es/select";
@@ -18,26 +18,36 @@ import {
   getProvinceActionRequest,
   getWardActionRequest
 } from "redux/features/profile.slice";
+import { updateProfileActionRequest } from "redux/features/auth.slice";
 import { ProfileTitle } from "../Profile.styled";
-import {
-  PersonalAddressFormSchema,
-  initialPersonalAddressFormValues
-} from "../Profile.constants";
+import { PersonalAddressFormSchema } from "../Profile.constants";
 
 const PersonalAddress = () => {
   const { t } = useTranslation();
   const [currentStep, setCurrentStep] = useState<number>(0);
   const dispatch = useAppDispatch();
+  const { profile, userInfo, loading } = useAppSelector(
+    (state: RootState) => state.auth
+  );
   const { provinceList, districtList, wardList } = useAppSelector(
     (state: RootState) => state.profile
   );
+
+  const initialPersonalAddressFormValues: IPersonalAddress = useMemo(() => {
+    return {
+      province: profile ? profile.province : null,
+      district: profile ? profile.district : null,
+      ward: profile ? profile.ward : null,
+      address: profile ? profile.address : ""
+    };
+  }, [profile]);
 
   const {
     handleSubmit,
     control,
     watch,
     reset,
-    formState: { errors }
+    formState: { errors, isDirty }
   } = useForm<IPersonalAddress>({
     mode: "onChange",
     defaultValues: initialPersonalAddressFormValues,
@@ -45,7 +55,15 @@ const PersonalAddress = () => {
   });
 
   const handleSubmitPersonalAddressForm = (data: IPersonalAddress) => {
-    console.log("data", data);
+    dispatch(
+      updateProfileActionRequest({
+        params: data,
+        userId: `${userInfo?._id}`,
+        onFinish() {
+          reset({ ...data });
+        }
+      })
+    );
   };
 
   const selectOption = useCallback(
@@ -95,6 +113,7 @@ const PersonalAddress = () => {
                 placeholder={`${t("profile:province_placeholder")}`}
                 options={selectOption("province")}
                 errorText={errors.province?.message}
+                disabled={currentStep < 0}
               />
             );
           }}
@@ -119,6 +138,7 @@ const PersonalAddress = () => {
                 placeholder={`${t("profile:district_placeholder")}`}
                 options={selectOption("district")}
                 errorText={errors.district?.message}
+                disabled={currentStep < 1}
               />
             );
           }}
@@ -143,6 +163,7 @@ const PersonalAddress = () => {
                 placeholder={`${t("profile:ward_placeholder")}`}
                 options={selectOption("ward")}
                 errorText={errors.district?.message}
+                disabled={currentStep < 2}
               />
             );
           }}
@@ -164,6 +185,7 @@ const PersonalAddress = () => {
                 labelRequired
                 placeholder={`${t("profile:house_no_placeholder")}`}
                 errors={errors.address?.message}
+                disabled={currentStep < 3}
               />
             );
           }}
@@ -179,12 +201,6 @@ const PersonalAddress = () => {
   useEffect(() => {
     if (watch("province")) {
       setCurrentStep(1);
-      reset({
-        ...watch(),
-        district: null,
-        ward: null,
-        address: ""
-      });
       dispatch(getDistrictActionRequest(watch("province") as string));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -193,8 +209,6 @@ const PersonalAddress = () => {
   useEffect(() => {
     if (watch("district")) {
       setCurrentStep(2);
-      reset({ ...watch(), ward: null, address: "" });
-
       dispatch(getWardActionRequest(watch("district") as string));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -203,7 +217,6 @@ const PersonalAddress = () => {
   useEffect(() => {
     if (watch("ward")) {
       setCurrentStep(3);
-      reset({ ...watch(), address: "" });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [watch("ward")]);
@@ -217,6 +230,8 @@ const PersonalAddress = () => {
         htmlType="submit"
         content={t("profile:update")}
         className="w-full"
+        loading={loading}
+        disabled={loading || !isDirty}
       />
     </form>
   );

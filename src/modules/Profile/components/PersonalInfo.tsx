@@ -1,26 +1,38 @@
+import { useMemo } from "react";
 import { useForm, Controller } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { yupResolver } from "@hookform/resolvers/yup";
 import moment from "moment";
+import dayjs from "dayjs";
 
 import { IPersonalInfo } from "types/profile.model";
 import { CommonButton, CommonDatePick, TextField } from "components";
-import { useAppSelector } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
+import { updateProfileActionRequest } from "redux/features/auth.slice";
 import { ProfileTitle } from "../Profile.styled";
-import {
-  PersonalInfoFormSchema,
-  initialPersonalInfoFormValues
-} from "../Profile.constants";
+import { PersonalInfoFormSchema } from "../Profile.constants";
 
 const PersonalInfoForm = () => {
   const { t } = useTranslation();
-  const { userInfo } = useAppSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { userInfo, profile, loading } = useAppSelector(
+    (state: RootState) => state.auth
+  );
+
+  const initialPersonalInfoFormValues: IPersonalInfo = useMemo(() => {
+    return {
+      lastName: profile ? profile.lastName : "",
+      firstName: profile ? profile.firstName : "",
+      dob: profile ? profile.dob : moment().format()
+    };
+  }, [profile]);
 
   const {
     handleSubmit,
     control,
-    formState: { errors }
+    reset,
+    formState: { errors, isDirty }
   } = useForm<IPersonalInfo>({
     mode: "onChange",
     defaultValues: initialPersonalInfoFormValues,
@@ -32,7 +44,16 @@ const PersonalInfoForm = () => {
       ...data,
       dob: moment(data.dob).format()
     };
-    console.log("formatData", formatData);
+
+    dispatch(
+      updateProfileActionRequest({
+        params: formatData,
+        userId: `${userInfo?._id}`,
+        onFinish() {
+          reset({ ...formatData });
+        }
+      })
+    );
   };
 
   return (
@@ -43,6 +64,15 @@ const PersonalInfoForm = () => {
         containerClassName="mb-4"
         label={`${t("auth:email")}`}
         value={userInfo?.email}
+        disabled
+      />
+
+      <CommonDatePick
+        containerClassName="mb-4"
+        datePickerLabel={{
+          text: `${t("profile:participate_date")}`
+        }}
+        value={dayjs(userInfo?.createdAt)}
         disabled
       />
 
@@ -83,13 +113,14 @@ const PersonalInfoForm = () => {
       <Controller
         name="dob"
         control={control}
-        render={({ field: { name, ref, onChange, onBlur } }) => {
+        render={({ field: { name, ref, onChange, onBlur, value } }) => {
           return (
             <CommonDatePick
               name={name}
               ref={ref}
               onChange={onChange}
               onBlur={onBlur}
+              value={dayjs(value)}
               containerClassName="mb-7"
               placeholder={`${t("profile:dob_placeholder")}`}
               datePickerLabel={{
@@ -106,6 +137,8 @@ const PersonalInfoForm = () => {
         htmlType="submit"
         content={t("profile:update")}
         className="w-full"
+        loading={loading}
+        disabled={loading || !isDirty}
       />
     </form>
   );

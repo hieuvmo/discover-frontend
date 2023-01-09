@@ -1,5 +1,11 @@
 import { profileAPIs } from "constants/path.api";
-import { IDistrict, IProvince } from "types/profile.model";
+import {
+  IDistrict,
+  IPersonalAddress,
+  IPersonalInfo,
+  IProfileResponse,
+  IProvince
+} from "types/profile.model";
 import { unauthorizedRequest } from "./request";
 
 export const profileServices = {
@@ -20,5 +26,16 @@ export const profileServices = {
       profileAPIs.WARD(districtId)
     );
     return data.results;
+  },
+
+  async updateProfile(
+    params: IPersonalInfo | IPersonalAddress,
+    userId: string
+  ): Promise<IProfileResponse> {
+    const { data } = await unauthorizedRequest.put(
+      profileAPIs.UPDATE_PROFILE(userId),
+      params
+    );
+    return data;
   }
 };

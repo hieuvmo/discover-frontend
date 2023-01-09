@@ -2,12 +2,15 @@ import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useCallback } from "react";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 import { IChangePsw } from "types/auth.model";
-import { useAppSelector } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import { CommonButton, PasswordField } from "components";
 import { ProfileTitle } from "modules/Profile/Profile.styled";
+import { changePswActionRequest } from "redux/features/auth.slice";
+import { routerPaths } from "routers/router.paths";
 import {
   changePswFormSchema,
   initialChangePswFormValues
@@ -16,13 +19,15 @@ import { APIErrorMessage } from "./ChangePsw.styled";
 
 const ChangePswForm = () => {
   const { t } = useTranslation();
-  const { loading, message, success } = useAppSelector(
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+  const { loading, message, success, userInfo } = useAppSelector(
     (state: RootState) => state.auth
   );
   const {
     handleSubmit,
     control,
-    formState: { errors }
+    formState: { errors, isValid }
   } = useForm<IChangePsw>({
     mode: "onChange",
     defaultValues: initialChangePswFormValues,
@@ -37,7 +42,19 @@ const ChangePswForm = () => {
   }, [success, message]);
 
   const handleSubmitChangePswForm = (data: IChangePsw) => {
-    console.log("data", data);
+    const inputData: IChangePsw = {
+      userId: userInfo?._id,
+      oldPassword: data.oldPassword,
+      newPassword: data.newPassword
+    };
+    dispatch(
+      changePswActionRequest({
+        params: inputData,
+        onFinish() {
+          navigate(routerPaths.HOME);
+        }
+      })
+    );
   };
 
   return (
@@ -98,7 +115,7 @@ const ChangePswForm = () => {
         content={t("auth:change_psw")}
         className="w-full"
         loading={loading}
-        disabled={loading}
+        disabled={loading || !isValid}
       />
     </form>
   );

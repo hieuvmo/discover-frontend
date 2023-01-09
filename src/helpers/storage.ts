@@ -19,6 +19,10 @@ export const destroyLocalStorageItem = (key: string) => {
   localStorage.removeItem(key);
 };
 
+export const destroyAllLocalStorageItem = () => {
+  localStorage.clear();
+};
+
 export const setCookie = (
   name: string,
   value: string,
