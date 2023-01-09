@@ -40,5 +40,6 @@ export const profileAPIs = {
   DISTRICT: (provinceId: string) =>
     `${thirdPartyAPIs.PORT}${thirdPartyAPIs.PROVINCE}${thirdPartyAPIs.DISTRICT}/${provinceId}`,
   WARD: (districtId: string) =>
-    `${thirdPartyAPIs.PORT}${thirdPartyAPIs.PROVINCE}${thirdPartyAPIs.WARD}/${districtId}`
+    `${thirdPartyAPIs.PORT}${thirdPartyAPIs.PROVINCE}${thirdPartyAPIs.WARD}/${districtId}`,
+  UPDATE_PROFILE: (id: string) => `${endPointAPIs.PROFILE}/${id}`
 };

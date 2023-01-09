@@ -12,8 +12,12 @@
   "house_no_placeholder": "Nhập số nhà",
   "personal": "Cá nhân",
   "address": "Địa chỉ",
-  "participating": "Tham gia",
+  "participate_date": "Ngày tham gia",
   "change_psw": "Đổi mật khẩu",
   "order": "Đơn hàng",
-  "favorite": "Yêu thích"
+  "favorite": "Yêu thích",
+
+  "update_profile": "Cập nhật thông tin cá nhân",
+  "update_profile_success": "Thông tin cá nhân của bạn đã được cập nhật thành công",
+  "update_profile_failure": "Có lỗi xảy ra khi cập nhập thông tin cá nhân. Vui lòng thử lại sau"
 }
