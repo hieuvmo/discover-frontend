@@ -8,5 +8,9 @@
   "all": "Tất cả",
   "add_to_cart": "Thêm vào giỏ hàng",
   "add_to_favorite": "Thêm vào yêu thích",
-  "login_to_use": "Bạn cần đăng nhập để sử dụng chức năng này"
+  "login_to_use": "Bạn cần đăng nhập để sử dụng chức năng này",
+  "overview": "Tổng quan",
+  "detail_info": "Thông tin chi tiết",
+  "comment": "Bình luận",
+  "see_more": "Xem thêm"
 }

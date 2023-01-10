@@ -8,5 +8,9 @@
   "all": "All",
   "add_to_cart": "Add to cart",
   "add_to_favorite": "Add to favorite",
-  "login_to_use": "You need login to use this function"
+  "login_to_use": "You need login to use this function",
+  "overview": "Overview",
+  "detail_info": "Detail information",
+  "comment": "Comment",
+  "see_more": "See more"
 }
