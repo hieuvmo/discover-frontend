@@ -1,24 +1,7 @@
 import * as Yup from "yup";
 
-import {
-  IPersonalAddress,
-  IPersonalInfo,
-  ProfileTabs
-} from "types/profile.model";
+import { ProfileTabs } from "types/profile.model";
 import { i18nTranslate } from "helpers/language";
-
-export const initialPersonalInfoFormValues: IPersonalInfo = {
-  lastName: "",
-  firstName: "",
-  dob: ""
-};
-
-export const initialPersonalAddressFormValues: IPersonalAddress = {
-  province: null,
-  district: null,
-  ward: null,
-  address: ""
-};
 
 export const PersonalInfoFormSchema = Yup.object().shape({
   lastName: Yup.string().required(i18nTranslate("auth:is_required")),

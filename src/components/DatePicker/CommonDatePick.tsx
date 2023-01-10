@@ -52,6 +52,7 @@ const CommonDatePick = forwardRef<HTMLDivElement, CommonDatePickerProps>(
         <DatePicker
           className={clsx("w-full px-4 py-1.5", className)}
           {...other}
+          allowClear={false}
         />
         {renderErrorText}
       </div>

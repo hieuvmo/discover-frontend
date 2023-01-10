@@ -12,8 +12,15 @@
   "house_no_placeholder": "Enter house no",
   "personal": "Personal",
   "address": "Address",
-  "participating": "Participating",
+  "participate_date": "Participation date",
   "change_psw": "Change password",
   "order": "Order",
-  "favorite": "Favorite"
+  "favorite": "Favorite",
+  "update_profile": "Update profile",
+  "update_profile_success": "Your profile has been updated successfully",
+  "update_profile_failure": "An error occurred when updating profile. Please try again",
+  "update_avatar": "Update avatar",
+  "upload_size_err": "Image size is too large. Please choose another image",
+  "invalid_img_err": "Incorrect image format. Please try again",
+  "upload_avatar_err": "Unable to upload image. Please try again"
 }

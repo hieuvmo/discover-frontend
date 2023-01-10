@@ -1,5 +1,7 @@
 import { authAPIs } from "constants/path.api";
 import {
+  IChangePsw,
+  IChangePswResponse,
   ILogin,
   ILoginResponse,
   ILogoutResponse,
@@ -31,6 +33,14 @@ export const authServices = {
 
   async logout(): Promise<ILogoutResponse> {
     const { data } = await authorizedRequest.post(authAPIs.LOGOUT);
+    return data;
+  },
+
+  async changePassword(params: IChangePsw): Promise<IChangePswResponse> {
+    const { data } = await authorizedRequest.post(
+      authAPIs.CHANGE_PASSWORD,
+      params
+    );
     return data;
   }
 };

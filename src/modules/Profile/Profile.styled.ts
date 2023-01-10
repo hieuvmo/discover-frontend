@@ -11,6 +11,7 @@ export const ProfileTitle = styled.h2`
 
 export const ProfileAvatar = styled.div`
   width: 15rem;
+  height: 15rem;
   margin-inline: auto;
   position: relative;
 `;
@@ -31,7 +32,7 @@ export const ProfileTabsList = styled.ul`
 `;
 
 export const ProfileTabsItem = styled.li`
-  padding: 0.8rem 0.5rem;
+  padding: 0.75rem 0.5rem;
   text-align: center;
   margin-bottom: 0.75rem;
   background-color: white;

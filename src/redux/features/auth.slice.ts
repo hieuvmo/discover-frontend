@@ -1,6 +1,8 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 import {
+  IChangePsw,
+  IChangePswResponse,
   ILogin,
   ILoginResponse,
   ILogoutResponse,
@@ -8,7 +10,13 @@ import {
   ISignUpResponse,
   IUserInfo
 } from "types/auth.model";
-import { IProfile } from "types/profile.model";
+import {
+  IPersonalAddress,
+  IPersonalAvatar,
+  IPersonalInfo,
+  IProfile,
+  IProfileResponse
+} from "types/profile.model";
 
 export interface AuthState {
   modalMode: "login" | "sign-up" | "forgot-psw" | null;
@@ -112,6 +120,45 @@ export const authSlice = createSlice({
       message: action.payload.message,
       userInfo: action.payload.success ? null : state.userInfo,
       profile: action.payload.success ? null : state.profile
+    }),
+    changePswActionRequest: (
+      state: AuthState,
+      action: PayloadAction<{ params: IChangePsw; onFinish: () => void }>
+    ) => ({
+      ...state,
+      loading: true
+    }),
+    changePswActionComplete: (
+      state: AuthState,
+      action: PayloadAction<IChangePswResponse>
+    ) => ({
+      ...state,
+      loading: false,
+      success: action.payload.success,
+      message: action.payload.message,
+      userInfo: action.payload.success ? null : state.userInfo,
+      profile: action.payload.success ? null : state.profile
+    }),
+    updateProfileActionRequest: (
+      state: AuthState,
+      action: PayloadAction<{
+        params: IPersonalInfo | IPersonalAddress | IPersonalAvatar;
+        userId: string;
+        onFinish: () => void;
+      }>
+    ) => ({
+      ...state,
+      loading: true
+    }),
+    updateProfileActionComplete: (
+      state: AuthState,
+      action: PayloadAction<IProfileResponse>
+    ) => ({
+      ...state,
+      loading: false,
+      success: action.payload.success,
+      message: action.payload.message,
+      profile: action.payload.data ? action.payload.data : state.profile
     })
   }
 });
@@ -128,7 +175,11 @@ export const {
   loginActionRequest,
   loginActionComplete,
   logoutActionRequest,
-  logoutActionComplete
+  logoutActionComplete,
+  changePswActionRequest,
+  changePswActionComplete,
+  updateProfileActionRequest,
+  updateProfileActionComplete
 } = authSlice.actions;
 
 export default authSlice.reducer;
