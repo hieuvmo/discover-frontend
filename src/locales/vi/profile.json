@@ -16,8 +16,11 @@
   "change_psw": "Đổi mật khẩu",
   "order": "Đơn hàng",
   "favorite": "Yêu thích",
-
   "update_profile": "Cập nhật thông tin cá nhân",
   "update_profile_success": "Thông tin cá nhân của bạn đã được cập nhật thành công",
-  "update_profile_failure": "Có lỗi xảy ra khi cập nhập thông tin cá nhân. Vui lòng thử lại sau"
+  "update_profile_failure": "Có lỗi xảy ra khi cập nhập thông tin cá nhân. Vui lòng thử lại sau",
+  "update_avatar": "Cập nhật ảnh đại diện",
+  "upload_size_err": "Kích thước ảnh quá lớn. Vui lòng chọn một ảnh khác",
+  "invalid_img_err": "Không đúng định dạng ảnh. Vui lòng thử lại sau",
+  "upload_avatar_err": "Không thể cập nhật ảnh đại diện. Vui lòng thử lại sau"
 }

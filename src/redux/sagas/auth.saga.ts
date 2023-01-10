@@ -36,6 +36,7 @@ import {
 import { destroyAllLocalStorageItem } from "helpers/storage";
 import {
   IPersonalAddress,
+  IPersonalAvatar,
   IPersonalInfo,
   IProfileResponse
 } from "types/profile.model";
@@ -171,7 +172,7 @@ function* changePswActionSaga(
 
 function* updateProfileActionSaga(
   action: PayloadAction<{
-    params: IPersonalInfo | IPersonalAddress;
+    params: IPersonalInfo | IPersonalAddress | IPersonalAvatar;
     userId: string;
     onFinish: () => void;
   }>

@@ -12,6 +12,7 @@ import {
 } from "types/auth.model";
 import {
   IPersonalAddress,
+  IPersonalAvatar,
   IPersonalInfo,
   IProfile,
   IProfileResponse
@@ -141,7 +142,7 @@ export const authSlice = createSlice({
     updateProfileActionRequest: (
       state: AuthState,
       action: PayloadAction<{
-        params: IPersonalInfo | IPersonalAddress;
+        params: IPersonalInfo | IPersonalAddress | IPersonalAvatar;
         userId: string;
         onFinish: () => void;
       }>

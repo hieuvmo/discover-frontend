@@ -26,7 +26,8 @@ const authPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
 
 const profilePersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   key: "profile",
-  storage
+  storage,
+  blacklist: ["provinceList", "districtList", "wardList", "uploadedImg"]
 };
 
 export default {

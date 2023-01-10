@@ -49,6 +49,8 @@ export type IPersonalAddress = Pick<
   "userId" | "province" | "district" | "ward" | "address"
 >;
 
+export type IPersonalAvatar = Pick<IProfile, "avatar">;
+
 export enum ProfileTabs {
   PERSONAL_INFO = "personal",
   PERSONAL_ADDRESS = "address",
