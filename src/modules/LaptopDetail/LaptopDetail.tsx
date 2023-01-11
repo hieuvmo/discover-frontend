@@ -14,6 +14,7 @@ import {
   LaptopComment,
   LaptopDetailInfo,
   LaptopGallery,
+  LaptopMainInfo,
   LaptopOverview
 } from "./components";
 
@@ -48,9 +49,12 @@ const LaptopDetail = () => {
     <LaptopDetailContainer>
       <LaptopDetailLeftLayout>
         <LaptopGallery />
-        <Tabs defaultActiveKey="1" items={laptopDetailTabs} />;
+        <Tabs defaultActiveKey="1" items={laptopDetailTabs} />
       </LaptopDetailLeftLayout>
-      <LaptopDetailRightLayout>xyz</LaptopDetailRightLayout>
+
+      <LaptopDetailRightLayout>
+        <LaptopMainInfo />
+      </LaptopDetailRightLayout>
     </LaptopDetailContainer>
   );
 };
