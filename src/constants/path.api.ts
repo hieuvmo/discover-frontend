@@ -25,7 +25,8 @@ export const authAPIs = {
 };
 
 export const laptopAPIs = {
-  LIST: `${endPointAPIs.LAPTOP}`
+  LIST: `${endPointAPIs.LAPTOP}`,
+  DETAIL: (id: string) => `${endPointAPIs.LAPTOP}/${id}`
 };
 
 export const profileAPIs = {
