@@ -23,5 +23,18 @@
   "color": "Màu",
   "free_shipping": "Miễn phí giao hàng toàn quốc",
   "payment_security": "100% bảo mật thanh toán",
-  "reputation_product": "Nguồn cung sản phẩm uy tín"
+  "reputation_product": "Nguồn cung sản phẩm uy tín",
+  "type": "Chủng loại",
+  "rom": "Bộ nhớ trong",
+  "connector": "Số khe cắm",
+  "light_disk": "Ổ quang",
+  "card_reader": "Đầu đọc thẻ",
+  "audio": "Âm thanh",
+  "internet": "Giao tiếp mạng",
+  "no_wires": "Giao tiếp không dây",
+  "connection_port": "Cổng giao tiếp",
+  "battery": "Cổng giao tiếp",
+  "size": "Kích thước",
+  "weight": "Cân nặng",
+  "accessory": "Phụ kiện đi kèm"
 }

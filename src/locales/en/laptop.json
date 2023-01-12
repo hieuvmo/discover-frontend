@@ -23,5 +23,18 @@
   "color": "Color",
   "free_shipping": "Free shipping in nationwide",
   "payment_security": "100% payment security",
-  "reputation_product": "Prestigious product supply"
+  "reputation_product": "Prestigious product supply",
+  "type": "Type",
+  "rom": "Rom",
+  "connector": "Connector",
+  "light_disk": "Light disk",
+  "card_reader": "Card render",
+  "audio": "Audio",
+  "internet": "Internet",
+  "no_wires": "No wires",
+  "connection_port": "Connection port",
+  "battery": "Battery",
+  "size": "Size",
+  "weight": "Weight",
+  "accessory": "Accessory"
 }
