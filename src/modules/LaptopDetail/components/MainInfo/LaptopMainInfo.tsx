@@ -12,7 +12,7 @@ import {
   LaptopMainInfoContainer,
   ProductInfoOrderList,
   StoreCommitmentOrderList
-} from "../LaptopDetail.styled";
+} from "./MainInfo.styled";
 
 const LaptopMainInfo = () => {
   const { t } = useTranslation();

@@ -8,7 +8,7 @@ import {
   ImagePreviewItem,
   ImagePreviewList,
   MainImagePreview
-} from "../LaptopDetail.styled";
+} from "../../LaptopDetail.styled";
 
 const SeeMoreModal = () => {
   const [visible, setVisible] = useState<boolean>(false);

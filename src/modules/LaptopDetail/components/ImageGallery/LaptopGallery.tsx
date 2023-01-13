@@ -5,14 +5,13 @@ import { Modal } from "antd";
 import { useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import { CommonButton } from "components";
-
+import SeeMoreModal from "./SeeMoreModal";
 import {
   LaptopBigImage,
   LaptopCarouselItem,
   LaptopCarouselList,
   LaptopGalleryContainer
-} from "../LaptopDetail.styled";
-import SeeMoreModal from "./SeeMoreModal";
+} from "./ImageGallery.styled";
 
 const LaptopGallery = () => {
   const { t } = useTranslation();

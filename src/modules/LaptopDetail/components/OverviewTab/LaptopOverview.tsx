@@ -8,7 +8,7 @@ import { ChevronDownIcon } from "icons";
 import {
   LaptopOverviewContainer,
   LaptopOverviewSeeMore
-} from "../LaptopDetail.styled";
+} from "./OverviewTab.styled";
 
 const LaptopOverview = () => {
   const { t } = useTranslation();
