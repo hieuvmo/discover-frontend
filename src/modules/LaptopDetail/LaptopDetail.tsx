@@ -1,10 +1,11 @@
 import { useEffect } from "react";
-import { Tabs, TabsProps } from "antd";
+import { Badge, Tabs, TabsProps } from "antd";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
 import { getLaptopDetailActionRequest } from "redux/features/laptop.slice";
-import { useAppDispatch } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { RootState } from "redux/store";
 import {
   LaptopDetailContainer,
   LaptopDetailLeftLayout,
@@ -20,8 +21,9 @@ import {
 
 const LaptopDetail = () => {
   const { t } = useTranslation();
-  const dispatch = useAppDispatch();
   const { id } = useParams();
+  const dispatch = useAppDispatch();
+  const { commentList } = useAppSelector((state: RootState) => state.laptop);
 
   const laptopDetailTabs: TabsProps["items"] = [
     {
@@ -36,7 +38,16 @@ const LaptopDetail = () => {
     },
     {
       key: "comment",
-      label: t("laptop:comment"),
+      label: (
+        <Badge
+          count={commentList.length}
+          offset={[20, 8]}
+          showZero
+          color="#7F56D9"
+        >
+          {t("laptop:comment")}
+        </Badge>
+      ),
       children: <LaptopComment />
     }
   ];

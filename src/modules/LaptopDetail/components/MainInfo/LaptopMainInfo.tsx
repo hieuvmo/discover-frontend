@@ -74,11 +74,22 @@ const LaptopMainInfo = () => {
     }
   }, [laptopDetail, t]);
 
+  const averageRating = useMemo(() => {
+    if (commentList.length > 0) {
+      const ratingSum = commentList.reduce(
+        (accumulator, currentValue) => accumulator + currentValue.rating,
+        0
+      );
+      return ratingSum / commentList.length;
+    }
+    return 0;
+  }, [commentList]);
+
   return (
     <LaptopMainInfoContainer>
       <h2>{laptopDetail?.productName}</h2>
       <LaptopDetailRating>
-        <Rate allowHalf defaultValue={2.75} />
+        <Rate disabled allowHalf value={averageRating} />
         {`${commentList.length} ${t("laptop:rating_times")}`}
       </LaptopDetailRating>
       <h3>{laptopDetail?.price}</h3>

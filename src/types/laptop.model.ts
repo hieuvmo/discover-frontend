@@ -1,5 +1,4 @@
-import { IUserInfo } from "./auth.model";
-import { IProfile } from "./profile.model";
+import { IComment } from "./comment.model";
 
 export interface ILaptop {
   _id: string;
@@ -36,16 +35,6 @@ export interface ILaptop {
   accessory: string;
   updatedAt: string;
   review: string;
-}
-
-export interface IComment {
-  _id: string;
-  userId: IUserInfo;
-  userProfile: IProfile;
-  comment: string;
-  laptopId: string;
-  rating: number;
-  updatedAt: string;
 }
 
 export interface ILaptopDetail {

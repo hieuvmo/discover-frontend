@@ -36,5 +36,17 @@
   "battery": "Cổng giao tiếp",
   "size": "Kích thước",
   "weight": "Cân nặng",
-  "accessory": "Phụ kiện đi kèm"
+  "accessory": "Phụ kiện đi kèm",
+  "rating": "Đánh giá",
+  "edit": "Sửa",
+  "delete": "Xóa",
+  "add_new": "Thêm mới bình luận",
+  "add_new_success": "Thêm mới bình luận thành công",
+  "add_new_failure": "Thêm mới bình luận thất bại",
+  "edit_comment": "Sửa bình luận",
+  "edit_comment_success": "Sửa bình luận thành công",
+  "edit_comment_failure": "Sửa bình luận thất bại",
+  "delete_comment": "Xóa bình luận",
+  "delete_comment_success": "Xóa bình luận thành công",
+  "delete_comment_failure": "Xóa bình luận thất bại"
 }
