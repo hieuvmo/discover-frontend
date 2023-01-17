@@ -117,3 +117,10 @@ export const LaptopListLayout = styled.div`
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 0.25rem;
 `;
+
+export const LaptopListLoading = styled.div`
+  height: calc(100vh - 8rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

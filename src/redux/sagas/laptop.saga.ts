@@ -95,15 +95,17 @@ function* deleteCommentByIdActionSaga(
   action: PayloadAction<{
     userId: string;
     commentId: string;
+    onFinish: () => void;
   }>
 ) {
-  const { userId, commentId } = action.payload;
+  const { userId, commentId, onFinish } = action.payload;
 
   try {
     const response: ICommentResponse = yield call(() =>
       laptopServices.deleteCommentById(userId, commentId)
     );
     yield put(deleteCommentByIdActionComplete({ ...response, success: true }));
+    onFinish?.();
     notification.success({
       message: i18nTranslate("laptop:delete_comment"),
       description: i18nTranslate("laptop:delete_comment_success")

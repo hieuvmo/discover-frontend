@@ -10,8 +10,10 @@ export interface LaptopState {
   laptopDetail: ILaptop | null;
   commentList: IComment[];
   commentItem: IComment | null;
-  success: boolean;
+  success: boolean | null;
   message: string;
+  commentItemLoading: boolean;
+  deleteLoading: boolean;
   loading: boolean;
 }
 
@@ -20,8 +22,10 @@ const initialState: LaptopState = {
   laptopDetail: null,
   commentList: [],
   commentItem: null,
-  success: false,
+  success: null,
   message: "",
+  commentItemLoading: false,
+  deleteLoading: false,
   loading: false
 };
 
@@ -46,16 +50,21 @@ export const laptopSlice = createSlice({
       action: PayloadAction<string>
     ) => ({
       ...state,
-      loading: true
+      commentItemLoading: true
     }),
     getLaptopDetailActionComplete: (
       state: LaptopState,
       action: PayloadAction<{ laptop: ILaptop | null; comments: IComment[] }>
     ) => ({
       ...state,
-      loading: false,
+      commentItemLoading: false,
       laptopDetail: action.payload.laptop,
       commentList: action.payload.comments
+    }),
+    resetComment: (state: LaptopState) => ({
+      ...state,
+      success: null,
+      message: ""
     }),
     addNewCommentActionRequest: (
       state: LaptopState,
@@ -155,10 +164,11 @@ export const laptopSlice = createSlice({
       action: PayloadAction<{
         userId: string;
         commentId: string;
+        onFinish: () => void;
       }>
     ) => ({
       ...state,
-      loading: true
+      deleteLoading: true
     }),
     deleteCommentByIdActionComplete: (
       state: LaptopState,
@@ -172,7 +182,7 @@ export const laptopSlice = createSlice({
 
       return {
         ...state,
-        loading: false,
+        deleteLoading: false,
         success,
         message,
         commentList: data ? deletedCommentList : state.commentList
@@ -186,6 +196,7 @@ export const {
   getLaptopListComplete,
   getLaptopDetailActionRequest,
   getLaptopDetailActionComplete,
+  resetComment,
   addNewCommentActionRequest,
   addNewCommentActionComplete,
   setCommentItem,

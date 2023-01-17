@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import {
   deleteCommentByIdActionRequest,
+  resetComment,
   setCommentItem
 } from "redux/features/laptop.slice";
 import { IComment } from "types/comment.model";
@@ -53,7 +54,10 @@ const CommentCard = ({
     dispatch(
       deleteCommentByIdActionRequest({
         userId: `${userInfo?._id}`,
-        commentId: selectedCommentId
+        commentId: selectedCommentId,
+        onFinish() {
+          dispatch(resetComment());
+        }
       })
     );
   };

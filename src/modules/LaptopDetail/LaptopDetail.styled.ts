@@ -49,3 +49,10 @@ export const ImagePreviewItem = styled.div`
     border: 1px solid black;
   }
 `;
+
+export const LaptopDetailLoading = styled.div`
+  height: calc(100vh - 8rem);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+`;

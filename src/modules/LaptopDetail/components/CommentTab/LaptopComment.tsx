@@ -18,6 +18,7 @@ import { RootState } from "redux/store";
 import { IComment, ICommentInput } from "types/comment.model";
 import {
   addNewCommentActionRequest,
+  resetComment,
   setNullCommentItem,
   updateCommentByIdActionRequest
 } from "redux/features/laptop.slice";
@@ -51,14 +52,14 @@ const LaptopComment = () => {
     handleSubmit,
     control,
     reset,
-    watch,
+    getValues,
     formState: { errors, isValid }
   } = useForm<ICommentInput>({
     mode: "onChange",
     defaultValues: {
       laptopId: laptopDetail?._id,
       userId: userInfo?._id,
-      updatedAt: Date.now().toString(),
+      updatedAt: `${Date.now()}`,
       rating: 5,
       comment: ""
     },
@@ -70,39 +71,39 @@ const LaptopComment = () => {
   });
 
   const handleSubmitCommentForm = (data: ICommentInput) => {
-    if (userInfo && profile) {
-      if (commentItem) {
-        // edit
-        dispatch(
-          updateCommentByIdActionRequest({
-            input: { ...data, updatedAt: Date.now().toString() },
-            commentId: commentItem._id,
-            onFinish() {
-              dispatch(setNullCommentItem());
-              reset({ ...watch(), rating: 5, comment: "" });
-            }
-          })
-        );
-      } else {
-        // add new
-        const convertedProfile: IProfile[] = [profile];
-        dispatch(
-          addNewCommentActionRequest({
-            input: data,
-            userInfo,
-            profile: convertedProfile,
-            onFinish() {
-              reset({ ...watch(), rating: 5, comment: "" });
-            }
-          })
-        );
-      }
-    } else {
-      notification.error({
+    if (!userInfo || !profile) {
+      return notification.error({
         message: t("laptop:add_new"),
         description: t("laptop:login_to_use")
       });
     }
+    // add new
+    if (!commentItem) {
+      const convertedProfile: IProfile[] = [{ ...profile }];
+      return dispatch(
+        addNewCommentActionRequest({
+          input: { ...data, updatedAt: `${Date.now()}` },
+          userInfo,
+          profile: convertedProfile,
+          onFinish() {
+            dispatch(resetComment());
+            reset({ ...getValues(), rating: 5, comment: "" });
+          }
+        })
+      );
+    }
+    // edit
+    dispatch(
+      updateCommentByIdActionRequest({
+        input: { ...data, updatedAt: Date.now().toString() },
+        commentId: commentItem._id,
+        onFinish() {
+          dispatch(setNullCommentItem());
+          dispatch(resetComment());
+          reset({ ...getValues(), rating: 5, comment: "" });
+        }
+      })
+    );
   };
 
   useEffect(() => {
@@ -151,7 +152,7 @@ const LaptopComment = () => {
       </form>
       <CommentList>
         {[...commentList]
-          .reverse()
+          .sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1))
           .slice((pageNum - 1) * 5, pageNum * 5)
           .map((comment: IComment) => (
             <CommentCard

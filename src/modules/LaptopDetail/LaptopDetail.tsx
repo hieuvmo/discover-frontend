@@ -1,14 +1,18 @@
 import { useEffect } from "react";
-import { Badge, Tabs, TabsProps } from "antd";
+import { Badge, Spin, Tabs, TabsProps } from "antd";
 import { useTranslation } from "react-i18next";
 import { useParams } from "react-router-dom";
 
-import { getLaptopDetailActionRequest } from "redux/features/laptop.slice";
+import {
+  getLaptopDetailActionComplete,
+  getLaptopDetailActionRequest
+} from "redux/features/laptop.slice";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import {
   LaptopDetailContainer,
   LaptopDetailLeftLayout,
+  LaptopDetailLoading,
   LaptopDetailRightLayout
 } from "./LaptopDetail.styled";
 import {
@@ -23,7 +27,9 @@ const LaptopDetail = () => {
   const { t } = useTranslation();
   const { id } = useParams();
   const dispatch = useAppDispatch();
-  const { commentList } = useAppSelector((state: RootState) => state.laptop);
+  const { commentList, commentItemLoading } = useAppSelector(
+    (state: RootState) => state.laptop
+  );
 
   const laptopDetailTabs: TabsProps["items"] = [
     {
@@ -54,9 +60,17 @@ const LaptopDetail = () => {
 
   useEffect(() => {
     dispatch(getLaptopDetailActionRequest(`${id}`));
+
+    return () => {
+      dispatch(getLaptopDetailActionComplete({ laptop: null, comments: [] }));
+    };
   }, [dispatch, id]);
 
-  return (
+  return commentItemLoading ? (
+    <LaptopDetailLoading>
+      <Spin size="large" />
+    </LaptopDetailLoading>
+  ) : (
     <LaptopDetailContainer>
       <LaptopDetailLeftLayout>
         <LaptopGallery />
