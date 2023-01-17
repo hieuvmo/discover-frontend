@@ -7,6 +7,8 @@ export interface ProfileState {
   provinceList: IProvince[];
   districtList: IDistrict[];
   wardList: IWard[];
+  uploadedImg: string;
+  uploadedLoading: boolean;
   loading: boolean;
 }
 
@@ -14,6 +16,8 @@ const initialState: ProfileState = {
   provinceList: [],
   districtList: [],
   wardList: [],
+  uploadedImg: "",
+  uploadedLoading: false,
   loading: false
 };
 
@@ -62,6 +66,25 @@ export const profileSlice = createSlice({
       ...state,
       loading: false,
       wardList: action.payload
+    }),
+    uploadImageActionRequest: (
+      state: ProfileState,
+      action: PayloadAction<FormData>
+    ) => ({
+      ...state,
+      uploadedLoading: true
+    }),
+    uploadImageActionComplete: (
+      state: ProfileState,
+      action: PayloadAction<string>
+    ) => ({
+      ...state,
+      uploadedLoading: false,
+      uploadedImg: action.payload
+    }),
+    resetAfterChangeAvatar: (state: ProfileState) => ({
+      ...state,
+      uploadedImg: ""
     })
   }
 });
@@ -72,7 +95,10 @@ export const {
   getDistrictActionRequest,
   getDistrictActionComplete,
   getWardActionRequest,
-  getWardActionComplete
+  getWardActionComplete,
+  uploadImageActionRequest,
+  uploadImageActionComplete,
+  resetAfterChangeAvatar
 } = profileSlice.actions;
 
 export default profileSlice.reducer;

@@ -1,4 +1,6 @@
 import { PayloadAction } from "@reduxjs/toolkit";
+import { notification } from "antd";
+import { i18nTranslate } from "helpers/language";
 
 // TODO: All should import from saga not axios => oke bro
 import { all, call, put, takeLatest } from "redux-saga/effects";
@@ -9,7 +11,9 @@ import {
   getProvinceActionComplete,
   getProvinceActionRequest,
   getWardActionComplete,
-  getWardActionRequest
+  getWardActionRequest,
+  uploadImageActionComplete,
+  uploadImageActionRequest
 } from "redux/features/profile.slice";
 
 import { profileServices } from "services/profile.service";
@@ -48,10 +52,25 @@ function* getWardActionSaga(action: PayloadAction<string>) {
   }
 }
 
+function* uploadAvatarActionSaga(action: PayloadAction<FormData>) {
+  try {
+    const url: string = yield call(() =>
+      profileServices.uploadAvatar(action.payload)
+    );
+    yield put(uploadImageActionComplete(url));
+  } catch (error) {
+    yield notification.error({
+      message: i18nTranslate("profile:update_avatar"),
+      description: i18nTranslate("profile:upload_avatar_err")
+    });
+  }
+}
+
 export default function* profileSaga() {
   yield all([
     takeLatest(getProvinceActionRequest.type, getProvinceActionSaga),
     takeLatest(getDistrictActionRequest.type, getDistrictActionSaga),
-    takeLatest(getWardActionRequest.type, getWardActionSaga)
+    takeLatest(getWardActionRequest.type, getWardActionSaga),
+    takeLatest(uploadImageActionRequest.type, uploadAvatarActionSaga)
   ]);
 }

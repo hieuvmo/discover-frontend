@@ -33,12 +33,23 @@ export interface IProfile {
   updatedAt?: string;
 }
 
-export type IPersonalInfo = Pick<IProfile, "firstName" | "lastName" | "dob">;
+export interface IProfileResponse {
+  data: IProfile | null;
+  message: string;
+  success: boolean;
+}
+
+export type IPersonalInfo = Pick<
+  IProfile,
+  "userId" | "firstName" | "lastName" | "dob"
+>;
 
 export type IPersonalAddress = Pick<
   IProfile,
-  "province" | "district" | "ward" | "address"
+  "userId" | "province" | "district" | "ward" | "address"
 >;
+
+export type IPersonalAvatar = Pick<IProfile, "avatar">;
 
 export enum ProfileTabs {
   PERSONAL_INFO = "personal",

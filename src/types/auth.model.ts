@@ -71,3 +71,5 @@ export interface IChangePsw {
   newPassword: string;
   confirmNewPsw?: string;
 }
+
+export type IChangePswResponse = ISignUpResponse;
