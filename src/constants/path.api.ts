@@ -25,7 +25,14 @@ export const authAPIs = {
 };
 
 export const laptopAPIs = {
-  LIST: `${endPointAPIs.LAPTOP}`
+  LIST: `${endPointAPIs.LAPTOP}`,
+  DETAIL: (id: string) => `${endPointAPIs.LAPTOP}/${id}`
+};
+
+export const commentAPIs = {
+  ADD_NEW: `${endPointAPIs.LAPTOP}/comment`,
+  UPDATE: (id: string) => `${endPointAPIs.LAPTOP}/comment/${id}`,
+  DELETE: (id: string) => `${endPointAPIs.LAPTOP}/comment/${id}`
 };
 
 export const profileAPIs = {

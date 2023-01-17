@@ -16,3 +16,8 @@ export { default as ChevronLeftIcon } from "./ChevronLeftIcon";
 export { default as CameraIcon } from "./CameraIcon";
 export { default as MenuDotsIcon } from "./MenuDotsIcon";
 export { default as HeartIcon } from "./HeartIcon";
+export { default as TruckLoading } from "./TruckLoading";
+export { default as MoneyCheck } from "./MoneyCheck";
+export { default as BadgeCheck } from "./BadgeCheck";
+export { default as PencilIcon } from "./PencilIcon";
+export { default as TrashIcon } from "./TrashIcon";

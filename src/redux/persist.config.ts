@@ -14,7 +14,8 @@ const searchPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
 
 const laptopPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   key: "laptop",
-  storage
+  storage,
+  blacklist: ["commentItem"]
 };
 
 const authPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {

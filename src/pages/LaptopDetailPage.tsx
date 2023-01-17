@@ -1,5 +1,7 @@
+import { LaptopDetail } from "modules";
+
 const LaptopDetailPage = () => {
-  return <div>LaptopDetail</div>;
+  return <LaptopDetail />;
 };
 
 export default LaptopDetailPage;

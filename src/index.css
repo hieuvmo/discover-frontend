@@ -28,3 +28,8 @@
 .ant-dropdown-menu {
   @apply max-h-60 overflow-auto;
 }
+
+.ant-image-preview-img {
+  margin-inline: auto;
+  margin-top: -27rem;
+}

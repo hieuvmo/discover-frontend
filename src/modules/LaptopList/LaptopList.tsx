@@ -1,12 +1,16 @@
 import { useEffect, useMemo, useState } from "react";
-import { Divider, Pagination } from "antd";
+import { Divider, Pagination, Spin } from "antd";
 
-import { getLaptopListRequest } from "redux/features/laptop.slice";
+import {
+  getLaptopListComplete,
+  getLaptopListRequest
+} from "redux/features/laptop.slice";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import { ILaptop } from "types/laptop.model";
 import {
   LaptopListLayout,
+  LaptopListLoading,
   LeftLayoutList,
   MainLayoutList,
   RightLayoutList
@@ -16,7 +20,9 @@ import { LaptopCard, ListCheckbox, ListSearchBar } from "./components";
 const LaptopList = () => {
   const [pageNum, setPageNum] = useState<number>(1);
   const dispatch = useAppDispatch();
-  const { laptopList } = useAppSelector((state: RootState) => state.laptop);
+  const { laptopList, loading } = useAppSelector(
+    (state: RootState) => state.laptop
+  );
   const { checkedList, debouncedValue } = useAppSelector(
     (state: RootState) => state.search
   );
@@ -43,9 +49,17 @@ const LaptopList = () => {
 
   useEffect(() => {
     dispatch(getLaptopListRequest());
+
+    return () => {
+      dispatch(getLaptopListComplete([]));
+    };
   }, [dispatch]);
 
-  return (
+  return loading ? (
+    <LaptopListLoading>
+      <Spin size="large" />
+    </LaptopListLoading>
+  ) : (
     <>
       <ListSearchBar totalRecord={filteredLaptop.length} />
       <Divider />

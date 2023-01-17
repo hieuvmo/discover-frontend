@@ -1,3 +1,5 @@
+import { IComment } from "./comment.model";
+
 export interface ILaptop {
   _id: string;
   cpu: string;
@@ -33,4 +35,9 @@ export interface ILaptop {
   accessory: string;
   updatedAt: string;
   review: string;
+}
+
+export interface ILaptopDetail {
+  laptop: ILaptop;
+  comments: IComment[];
 }
