@@ -29,14 +29,14 @@ const PersonalAvatar = () => {
     if (file) {
       // check image size > 3MB
       if (file.size / 1024 / 1024 > 3) {
-        notification.error({
+        return notification.error({
           message: t("profile:update_avatar"),
           description: t("profile:upload_size_err")
         });
       }
       // check image format
       if (!file.type.includes("image")) {
-        notification.error({
+        return notification.error({
           message: t("profile:update_avatar"),
           description: t("profile:invalid_img_err")
         });

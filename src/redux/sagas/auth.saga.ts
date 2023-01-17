@@ -76,11 +76,11 @@ function* loginActionSaga(action: PayloadAction<ILogin>) {
         message: i18nTranslate("auth:success_login")
       })
     );
-    yield setAccessTokenToCookie(response.accessToken);
-    yield setRefreshTokenToCookie(response.refreshToken);
     yield put(resetAuthForm());
     yield put(unShowAuthModal());
-    yield message.open({
+    setRefreshTokenToCookie(response.refreshToken);
+    setAccessTokenToCookie(response.accessToken);
+    message.open({
       type: "success",
       content: i18nTranslate("auth:success_login")
     });
@@ -114,10 +114,10 @@ function* logoutActionSaga() {
       })
     );
     yield put(resetAuthForm());
-    yield destroyAllLocalStorageItem();
-    yield removeAccessTokenFromCookie();
-    yield removeRefreshTokenFromCookie();
-    yield message.open({
+    destroyAllLocalStorageItem();
+    removeAccessTokenFromCookie();
+    removeRefreshTokenFromCookie();
+    message.open({
       type: "success",
       content: i18nTranslate("auth:logout_success")
     });
@@ -148,11 +148,11 @@ function* changePswActionSaga(
       })
     );
     yield put(resetAuthForm());
-    yield destroyAllLocalStorageItem();
-    yield removeAccessTokenFromCookie();
-    yield removeRefreshTokenFromCookie();
-    yield onFinish?.();
-    yield notification.success({
+    destroyAllLocalStorageItem();
+    removeAccessTokenFromCookie();
+    removeRefreshTokenFromCookie();
+    onFinish?.();
+    notification.success({
       message: i18nTranslate("auth:change_psw"),
       description: i18nTranslate("auth:change_psw_success")
     });
@@ -163,7 +163,7 @@ function* changePswActionSaga(
         success: false
       })
     );
-    yield notification.error({
+    notification.error({
       message: i18nTranslate("auth:change_psw"),
       description: i18nTranslate("auth:wrong_old_psw")
     });
@@ -191,8 +191,8 @@ function* updateProfileActionSaga(
       })
     );
     yield put(resetAuthForm());
-    yield onFinish?.();
-    yield notification.success({
+    onFinish?.();
+    notification.success({
       message: i18nTranslate("profile:update_profile"),
       description: i18nTranslate("profile:update_profile_success")
     });
@@ -204,7 +204,7 @@ function* updateProfileActionSaga(
         data: null
       })
     );
-    yield notification.error({
+    notification.error({
       message: i18nTranslate("profile:update_profile"),
       description: i18nTranslate("profile:update_profile_failure")
     });
