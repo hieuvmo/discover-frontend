@@ -33,3 +33,7 @@
   margin-inline: auto;
   margin-top: -27rem;
 }
+
+.ant-notification-notice {
+  top: 4rem;
+}

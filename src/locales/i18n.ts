@@ -11,6 +11,8 @@ import laptopEn from "./en/laptop.json";
 import laptopVi from "./vi/laptop.json";
 import profileEn from "./en/profile.json";
 import profileVi from "./vi/profile.json";
+import cartEn from "./en/cart.json";
+import cartVi from "./vi/cart.json";
 
 const currentLanguage = getLocalStorageItem("i18nextLng") || "vi";
 
@@ -23,13 +25,15 @@ i18n
         common: commonEn,
         auth: authEn,
         laptop: laptopEn,
-        profile: profileEn
+        profile: profileEn,
+        cart: cartEn
       },
       vi: {
         common: commonVi,
         auth: authVi,
         laptop: laptopVi,
-        profile: profileVi
+        profile: profileVi,
+        cart: cartVi
       }
     },
     lng: currentLanguage,

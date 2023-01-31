@@ -74,7 +74,7 @@ export const LaptopCardWrapper = styled.div`
   flex-direction: column;
   position: relative;
 
-  h3 {
+  a {
     font-size: 0.875rem;
     cursor: pointer;
   }
@@ -99,7 +99,7 @@ export const MainLayoutList = styled.div`
 
 export const LeftLayoutList = styled.div`
   grid-column: span 1 / span 1;
-  height: calc(100vh - 12rem);
+  height: calc(100vh - 217px);
   position: relative;
 
   .ant-pagination.ant-pagination-simple {

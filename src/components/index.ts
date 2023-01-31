@@ -9,3 +9,4 @@ export * from "./Breadcrumb";
 export * from "./DatePicker";
 export * from "./Select";
 export * from "./Steps";
+export * from "./Modal";

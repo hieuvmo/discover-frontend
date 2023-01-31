@@ -1,0 +1,13 @@
+{
+  "cart": "Cart",
+  "pay": "Pay",
+  "close": "Close",
+  "add_to_cart": "Add to cart",
+  "add_to_cart_success": "Add laptop to cart successfully",
+  "remove_from_cart": "Remove from cart",
+  "remove_from_cart_success": "Remove laptop from cart successfully",
+  "increase_quantity_cart": "Increase laptop quantity successfully",
+  "total": "Total money",
+  "confirm_delete": "Confirm delete",
+  "confirm_delete_content": "Are you sure want to delete this laptop?"
+}
