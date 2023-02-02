@@ -1,14 +1,18 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { Dropdown, MenuProps, notification } from "antd";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import { CartIcon, HeartIcon, MenuDotsIcon } from "icons";
+import { CartIcon, HeartIcon, HeartRedIcon, MenuDotsIcon } from "icons";
 import { routerPaths } from "routers/router.paths";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { ILaptop } from "types/laptop.model";
 import { RootState } from "redux/store";
 import { addToCart } from "redux/features/cart.slice";
-import { ILaptop } from "types/laptop.model";
+import {
+  addToFavoriteList,
+  removeFromFavoriteList
+} from "redux/features/favorite.slice";
 import { LaptopCardWrapper } from "../LaptopList.styled";
 
 interface LaptopCardProp {
@@ -25,6 +29,15 @@ const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
     (state: RootState) => state.auth
   );
   const { laptopList } = useAppSelector((state: RootState) => state.laptop);
+  const { favoriteList } = useAppSelector((state: RootState) => state.favorite);
+
+  const isAddedLaptopToFavoriteList = useMemo(() => {
+    let res: boolean = false;
+    favoriteList.forEach((laptop: ILaptop) => {
+      if (laptop._id === laptopId) res = true;
+    });
+    return res;
+  }, [favoriteList, laptopId]);
 
   const handleClickAddToCart = () => {
     if (!userInfo || !profile) {
@@ -33,10 +46,10 @@ const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
         description: t("laptop:login_to_use")
       });
     }
-    const addedToCartLaptop = laptopList.filter(
+    const addedLaptopToCart = laptopList.filter(
       (laptop: ILaptop) => laptop._id === laptopId
     )[0];
-    dispatch(addToCart(addedToCartLaptop));
+    dispatch(addToCart(addedLaptopToCart));
   };
 
   const handleClickAddToFavorite = () => {
@@ -46,6 +59,13 @@ const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
         description: t("laptop:login_to_use")
       });
     }
+    const addedLaptopToFavorite = laptopList.filter(
+      (laptop: ILaptop) => laptop._id === laptopId
+    )[0];
+    if (isAddedLaptopToFavoriteList) {
+      return dispatch(removeFromFavoriteList(laptopId));
+    }
+    dispatch(addToFavoriteList(addedLaptopToFavorite));
   };
 
   const moreList: MenuProps["items"] = [
@@ -63,7 +83,11 @@ const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
           {t("laptop:add_to_favorite")}
         </div>
       ),
-      icon: <HeartIcon width={14} />
+      icon: isAddedLaptopToFavoriteList ? (
+        <HeartRedIcon width={14} />
+      ) : (
+        <HeartIcon width={14} />
+      )
     }
   ];
 

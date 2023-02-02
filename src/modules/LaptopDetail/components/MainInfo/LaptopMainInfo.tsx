@@ -5,8 +5,19 @@ import { useTranslation } from "react-i18next";
 import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import { CommonButton } from "components";
-import { BadgeCheck, HeartIcon, MoneyCheck, TruckLoading } from "icons";
+import {
+  BadgeCheck,
+  HeartIcon,
+  HeartRedIcon,
+  MoneyCheck,
+  TruckLoading
+} from "icons";
 import { addToCart } from "redux/features/cart.slice";
+import { ILaptop } from "types/laptop.model";
+import {
+  addToFavoriteList,
+  removeFromFavoriteList
+} from "redux/features/favorite.slice";
 import {
   ButtonAddToCart,
   LaptopDetailRating,
@@ -24,6 +35,7 @@ const LaptopMainInfo = () => {
   const { userInfo, profile } = useAppSelector(
     (state: RootState) => state.auth
   );
+  const { favoriteList } = useAppSelector((state: RootState) => state.favorite);
 
   const storeCommitmentList = [
     {
@@ -90,6 +102,14 @@ const LaptopMainInfo = () => {
     return 0;
   }, [commentList]);
 
+  const isAddedLaptopToFavoriteList = useMemo(() => {
+    let res: boolean = false;
+    favoriteList.forEach((laptop: ILaptop) => {
+      if (laptop._id === laptopDetail?._id) res = true;
+    });
+    return res;
+  }, [favoriteList, laptopDetail?._id]);
+
   const handleClickAddToCart = () => {
     if (!userInfo || !profile) {
       return notification.error({
@@ -99,6 +119,21 @@ const LaptopMainInfo = () => {
     }
     if (laptopDetail) dispatch(addToCart(laptopDetail));
   };
+
+  const handleClickAddToFavorite = () => {
+    if (!userInfo || !profile) {
+      return notification.error({
+        message: t("laptop:add_to_favorite"),
+        description: t("laptop:login_to_use")
+      });
+    }
+
+    if (isAddedLaptopToFavoriteList && laptopDetail) {
+      return dispatch(removeFromFavoriteList(laptopDetail._id));
+    }
+    if (laptopDetail) dispatch(addToFavoriteList(laptopDetail));
+  };
+
   return (
     <LaptopMainInfoContainer>
       <h2>{laptopDetail?.productName}</h2>
@@ -124,7 +159,14 @@ const LaptopMainInfo = () => {
         <CommonButton
           className="h-11"
           type="default"
-          content={<HeartIcon width={15} />}
+          content={
+            isAddedLaptopToFavoriteList ? (
+              <HeartRedIcon width={15} />
+            ) : (
+              <HeartIcon width={15} />
+            )
+          }
+          onClick={handleClickAddToFavorite}
         />
       </ButtonAddToCart>
       <StoreCommitmentOrderList>

@@ -1,5 +1,10 @@
 import styled from "styled-components";
 
+export const CartListContainer = styled.div`
+  max-height: calc(100vh - 25rem);
+  overflow-y: auto;
+`;
+
 export const CartContentContainer = styled.div`
   display: flex;
   gap: 1.5rem;
@@ -31,6 +36,7 @@ export const CartLaptopDetail = styled.div`
   flex-direction: column;
   justify-content: space-between;
   margin-top: 1rem;
+  margin-right: 1rem;
 
   .ant-divider {
     margin-top: 0;

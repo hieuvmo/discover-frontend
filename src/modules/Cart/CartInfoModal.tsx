@@ -20,6 +20,7 @@ import {
   CartAddMinusQuantity,
   CartContentContainer,
   CartLaptopDetail,
+  CartListContainer,
   CartMoneyTotal,
   CartQuantityContainer
 } from "./CartInfo.styled";
@@ -63,7 +64,7 @@ const CartInfoModal = () => {
   };
 
   return (
-    <>
+    <CartListContainer>
       {cartList.map(({ laptop, quantity }) => (
         <CartContentContainer key={laptop._id}>
           <img src={laptop.productImg[2]} alt={laptop.productImg[2]} />
@@ -101,7 +102,7 @@ const CartInfoModal = () => {
         <Text>{totalPriceInCart}</Text>
       </CartMoneyTotal>
       <Divider className="mb-4" />
-    </>
+    </CartListContainer>
   );
 };
 

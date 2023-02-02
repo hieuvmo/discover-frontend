@@ -7,6 +7,7 @@ import laptopReducer from "./features/laptop.slice";
 import authReducer from "./features/auth.slice";
 import profileReducer from "./features/profile.slice";
 import cartReducer from "./features/cart.slice";
+import favoriteReducer from "./features/favorite.slice";
 import persistConfig from "./persist.config";
 import rootSaga from "./root.saga";
 
@@ -17,7 +18,8 @@ const combinedReducers = combineReducers({
   laptop: laptopReducer,
   auth: authReducer,
   profile: profileReducer,
-  cart: cartReducer
+  cart: cartReducer,
+  favorite: favoriteReducer
 });
 
 export const store = configureStore({

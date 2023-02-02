@@ -57,3 +57,43 @@ export const ProfileTabsItem = styled.li`
     transition: all ease 0.5s;
   }
 `;
+
+export const FavoriteListContainer = styled.div`
+  display: grid;
+  gap: 1rem;
+  cursor: pointer;
+  max-height: calc(100vh - 12.5rem);
+  overflow-y: auto;
+`;
+
+export const FavoriteCardContainer = styled.div`
+  box-shadow: 12px 1px 14px 4px rgb(118 118 118 / 27%);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-radius: 0.5rem;
+  background-color: white;
+
+  img {
+    border-radius: 0.5rem;
+    margin: auto;
+  }
+`;
+
+export const FavoriteCardDetail = styled.div`
+  grid-column: span 2 / span 2;
+  padding: 1rem;
+`;
+
+export const FavoriteCardStatus = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  span {
+    color: rgb(24, 186, 146);
+    font-weight: 600;
+  }
+
+  svg {
+    color: #7f56d9;
+  }
+`;

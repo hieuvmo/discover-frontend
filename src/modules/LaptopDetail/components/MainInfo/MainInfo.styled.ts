@@ -40,6 +40,14 @@ export const ButtonAddToCart = styled.div`
   display: flex;
   gap: 1.5rem;
   margin-block: 2rem;
+
+  button div {
+    fill: #8e8c94;
+  }
+
+  button:hover div {
+    fill: #7f56d9;
+  }
 `;
 
 export const StoreCommitmentOrderList = styled.div`
