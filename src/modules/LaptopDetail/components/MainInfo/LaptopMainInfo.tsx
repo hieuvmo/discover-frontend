@@ -103,11 +103,11 @@ const LaptopMainInfo = () => {
   }, [commentList]);
 
   const isAddedLaptopToFavoriteList = useMemo(() => {
-    let res: boolean = false;
-    favoriteList.forEach((laptop: ILaptop) => {
-      if (laptop._id === laptopDetail?._id) res = true;
-    });
-    return res;
+    const res = favoriteList.findIndex(
+      (laptop: ILaptop) => laptop._id === laptopDetail?._id
+    );
+    if (res !== -1) return true;
+    return false;
   }, [favoriteList, laptopDetail?._id]);
 
   const handleClickAddToCart = () => {

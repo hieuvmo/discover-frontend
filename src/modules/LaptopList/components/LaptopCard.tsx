@@ -32,11 +32,11 @@ const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
   const { favoriteList } = useAppSelector((state: RootState) => state.favorite);
 
   const isAddedLaptopToFavoriteList = useMemo(() => {
-    let res: boolean = false;
-    favoriteList.forEach((laptop: ILaptop) => {
-      if (laptop._id === laptopId) res = true;
-    });
-    return res;
+    const res = favoriteList.findIndex(
+      (laptop: ILaptop) => laptop._id === laptopId
+    );
+    if (res !== -1) return true;
+    return false;
   }, [favoriteList, laptopId]);
 
   const handleClickAddToCart = () => {

@@ -33,6 +33,9 @@ const CartInfoModal = () => {
   const { cartList } = useAppSelector((state: RootState) => state.cart);
 
   const totalPriceInCart = useMemo(() => {
+    if (!cartList.length) {
+      return "";
+    }
     const res = cartList.reduce(
       (prev, curr) =>
         prev + formatMoneyToNumber(curr.laptop.price) * curr.quantity,

@@ -36,9 +36,9 @@ const NavCart = () => {
 
       <CartModal
         titleIcon={<CartIcon width={14} fill="#7f56d9" />}
-        titleText={`${t("cart:cart")}`}
-        okContent={`${t("cart:pay")}`}
-        cancelContent={`${t("cart:close")}`}
+        titleText={t("cart:cart") || ""}
+        okContent={t("cart:pay")}
+        cancelContent={t("cart:close")}
         open={isModalOpen}
         onOk={handleOk}
         onCancel={handleCancel}

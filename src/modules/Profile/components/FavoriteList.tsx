@@ -17,12 +17,7 @@ const FavoriteList = () => {
       {favoriteList.length ? (
         <FavoriteListContainer className="grid-cols-1 2xl:grid-cols-2">
           {favoriteList.map((laptop: ILaptop) => (
-            <FavoriteCard
-              key={laptop._id}
-              laptopId={laptop._id}
-              laptopImg={laptop.productImg[2]}
-              laptopName={laptop.productName}
-            />
+            <FavoriteCard key={laptop._id} laptopId={laptop._id} />
           ))}
         </FavoriteListContainer>
       ) : (
