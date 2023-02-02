@@ -1,0 +1,18 @@
+{
+  "cart": "Cart",
+  "pay": "Pay",
+  "close": "Close",
+  "add_to_cart": "Add to cart",
+  "add_to_cart_success": "Add laptop to cart successfully",
+  "remove_from_cart": "Remove from cart",
+  "remove_from_cart_success": "Remove laptop from cart successfully",
+  "increase_quantity_cart": "Increase laptop quantity successfully",
+  "total": "Total money",
+  "confirm_delete": "Confirm delete",
+  "confirm_delete_content": "Are you sure want to delete this laptop?",
+  "add_to_favorite": "Add to favorite list",
+  "add_to_favorite_success": "Add laptop to favorite list successfully",
+  "remove_from_favorite": "Remove from favorite list",
+  "remove_from_favorite_success": "Remove laptop from favorite list successfully",
+  "in_stock": "In stock"
+}

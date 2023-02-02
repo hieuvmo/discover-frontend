@@ -1,12 +1,18 @@
-import { memo } from "react";
+import { memo, useMemo } from "react";
 import { Dropdown, MenuProps, notification } from "antd";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-import { getRefreshTokenFromCookie } from "helpers/token";
-import { i18nTranslate } from "helpers/language";
-import { CartIcon, HeartIcon, MenuDotsIcon } from "icons";
+import { CartIcon, HeartIcon, HeartRedIcon, MenuDotsIcon } from "icons";
 import { routerPaths } from "routers/router.paths";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
+import { ILaptop } from "types/laptop.model";
+import { RootState } from "redux/store";
+import { addToCart } from "redux/features/cart.slice";
+import {
+  addToFavoriteList,
+  removeFromFavoriteList
+} from "redux/features/favorite.slice";
 import { LaptopCardWrapper } from "../LaptopList.styled";
 
 interface LaptopCardProp {
@@ -18,33 +24,48 @@ interface LaptopCardProp {
 
 const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
   const { t } = useTranslation();
-  const navigate = useNavigate();
-  const refreshToken = getRefreshTokenFromCookie();
+  const dispatch = useAppDispatch();
+  const { userInfo, profile } = useAppSelector(
+    (state: RootState) => state.auth
+  );
+  const { laptopList } = useAppSelector((state: RootState) => state.laptop);
+  const { favoriteList } = useAppSelector((state: RootState) => state.favorite);
 
-  const handleClickToDetailLaptop = () => {
-    navigate(`${routerPaths.LAPTOP_LIST}/${laptopId}`);
-  };
+  const isAddedLaptopToFavoriteList = useMemo(() => {
+    const res = favoriteList.findIndex(
+      (laptop: ILaptop) => laptop._id === laptopId
+    );
+    if (res !== -1) return true;
+    return false;
+  }, [favoriteList, laptopId]);
 
   const handleClickAddToCart = () => {
-    if (refreshToken) {
-      // handle add to cart
-    } else {
-      notification.error({
-        message: i18nTranslate("laptop:add_to_cart"),
-        description: i18nTranslate("laptop:login_to_use")
+    if (!userInfo || !profile) {
+      return notification.error({
+        message: t("laptop:add_to_cart"),
+        description: t("laptop:login_to_use")
       });
     }
+    const addedLaptopToCart = laptopList.filter(
+      (laptop: ILaptop) => laptop._id === laptopId
+    )[0];
+    dispatch(addToCart(addedLaptopToCart));
   };
 
   const handleClickAddToFavorite = () => {
-    if (refreshToken) {
-      // handle add to favorite
-    } else {
-      notification.error({
-        message: i18nTranslate("laptop:add_to_favorite"),
-        description: i18nTranslate("laptop:login_to_use")
+    if (!userInfo || !profile) {
+      return notification.error({
+        message: t("laptop:add_to_favorite"),
+        description: t("laptop:login_to_use")
       });
     }
+    const addedLaptopToFavorite = laptopList.filter(
+      (laptop: ILaptop) => laptop._id === laptopId
+    )[0];
+    if (isAddedLaptopToFavoriteList) {
+      return dispatch(removeFromFavoriteList(laptopId));
+    }
+    dispatch(addToFavoriteList(addedLaptopToFavorite));
   };
 
   const moreList: MenuProps["items"] = [
@@ -62,14 +83,18 @@ const LaptopCard = ({ laptopId, image, name, price }: LaptopCardProp) => {
           {t("laptop:add_to_favorite")}
         </div>
       ),
-      icon: <HeartIcon width={14} />
+      icon: isAddedLaptopToFavoriteList ? (
+        <HeartRedIcon width={14} />
+      ) : (
+        <HeartIcon width={14} />
+      )
     }
   ];
 
   return (
     <LaptopCardWrapper>
       <img src={image} alt={name} />
-      <h3 onClick={handleClickToDetailLaptop}>{name}</h3>
+      <Link to={`${routerPaths.LAPTOP_LIST}/${laptopId}`}>{name}</Link>
       <p>{price}</p>
       <Dropdown
         menu={{ items: moreList }}

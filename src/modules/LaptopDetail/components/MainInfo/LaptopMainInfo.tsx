@@ -1,11 +1,23 @@
 import { useMemo } from "react";
-import { Rate } from "antd";
+import { Rate, notification } from "antd";
 import { useTranslation } from "react-i18next";
 
-import { useAppSelector } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
 import { CommonButton } from "components";
-import { BadgeCheck, HeartIcon, MoneyCheck, TruckLoading } from "icons";
+import {
+  BadgeCheck,
+  HeartIcon,
+  HeartRedIcon,
+  MoneyCheck,
+  TruckLoading
+} from "icons";
+import { addToCart } from "redux/features/cart.slice";
+import { ILaptop } from "types/laptop.model";
+import {
+  addToFavoriteList,
+  removeFromFavoriteList
+} from "redux/features/favorite.slice";
 import {
   ButtonAddToCart,
   LaptopDetailRating,
@@ -16,9 +28,14 @@ import {
 
 const LaptopMainInfo = () => {
   const { t } = useTranslation();
+  const dispatch = useAppDispatch();
   const { laptopDetail, commentList } = useAppSelector(
     (state: RootState) => state.laptop
   );
+  const { userInfo, profile } = useAppSelector(
+    (state: RootState) => state.auth
+  );
+  const { favoriteList } = useAppSelector((state: RootState) => state.favorite);
 
   const storeCommitmentList = [
     {
@@ -85,6 +102,38 @@ const LaptopMainInfo = () => {
     return 0;
   }, [commentList]);
 
+  const isAddedLaptopToFavoriteList = useMemo(() => {
+    const res = favoriteList.findIndex(
+      (laptop: ILaptop) => laptop._id === laptopDetail?._id
+    );
+    if (res !== -1) return true;
+    return false;
+  }, [favoriteList, laptopDetail?._id]);
+
+  const handleClickAddToCart = () => {
+    if (!userInfo || !profile) {
+      return notification.error({
+        message: t("laptop:add_to_cart"),
+        description: t("laptop:login_to_use")
+      });
+    }
+    if (laptopDetail) dispatch(addToCart(laptopDetail));
+  };
+
+  const handleClickAddToFavorite = () => {
+    if (!userInfo || !profile) {
+      return notification.error({
+        message: t("laptop:add_to_favorite"),
+        description: t("laptop:login_to_use")
+      });
+    }
+
+    if (isAddedLaptopToFavoriteList && laptopDetail) {
+      return dispatch(removeFromFavoriteList(laptopDetail._id));
+    }
+    if (laptopDetail) dispatch(addToFavoriteList(laptopDetail));
+  };
+
   return (
     <LaptopMainInfoContainer>
       <h2>{laptopDetail?.productName}</h2>
@@ -105,11 +154,19 @@ const LaptopMainInfo = () => {
         <CommonButton
           className="h-11 font-semibold"
           content={t("laptop:add_to_cart")}
+          onClick={handleClickAddToCart}
         />
         <CommonButton
           className="h-11"
           type="default"
-          content={<HeartIcon width={15} />}
+          content={
+            isAddedLaptopToFavoriteList ? (
+              <HeartRedIcon width={15} />
+            ) : (
+              <HeartIcon width={15} />
+            )
+          }
+          onClick={handleClickAddToFavorite}
         />
       </ButtonAddToCart>
       <StoreCommitmentOrderList>

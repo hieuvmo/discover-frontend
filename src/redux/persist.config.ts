@@ -5,6 +5,8 @@ import searchReducer from "./features/search.slice";
 import laptopReducer from "./features/laptop.slice";
 import authReducer from "./features/auth.slice";
 import profileReducer from "./features/profile.slice";
+import cartReducer from "./features/cart.slice";
+import favoriteReducer from "./features/favorite.slice";
 
 const searchPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   key: "search",
@@ -30,9 +32,21 @@ const profilePersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   blacklist: ["provinceList", "districtList", "wardList", "uploadedImg"]
 };
 
+const cartPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
+  key: "cart",
+  storage
+};
+
+const favoritePersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
+  key: "favorite",
+  storage
+};
+
 export default {
   search: persistReducer(searchPersistConfig, searchReducer),
   laptop: persistReducer(laptopPersistConfig, laptopReducer),
   auth: persistReducer(authPersistConfig, authReducer),
-  profile: persistReducer(profilePersistConfig, profileReducer)
+  profile: persistReducer(profilePersistConfig, profileReducer),
+  cart: persistReducer(cartPersistConfig, cartReducer),
+  favorite: persistReducer(favoritePersistConfig, favoriteReducer)
 };

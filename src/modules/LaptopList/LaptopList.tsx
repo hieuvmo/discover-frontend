@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from "react";
-import { Divider, Pagination, Spin } from "antd";
+import { Divider, Empty, Pagination, Spin } from "antd";
 
 import {
   getLaptopListComplete,
@@ -76,19 +76,23 @@ const LaptopList = () => {
         </LeftLayoutList>
 
         <RightLayoutList>
-          <LaptopListLayout>
-            {filteredLaptop
-              .slice((pageNum - 1) * 12, pageNum * 12)
-              .map((laptop: ILaptop) => (
-                <LaptopCard
-                  key={laptop._id}
-                  laptopId={laptop._id}
-                  image={laptop.productImg[2]}
-                  name={laptop.productName.split("(")[0]}
-                  price={laptop.price}
-                />
-              ))}
-          </LaptopListLayout>
+          {filteredLaptop.length ? (
+            <LaptopListLayout>
+              {filteredLaptop
+                .slice((pageNum - 1) * 12, pageNum * 12)
+                .map((laptop: ILaptop) => (
+                  <LaptopCard
+                    key={laptop._id}
+                    laptopId={laptop._id}
+                    image={laptop.productImg[2]}
+                    name={laptop.productName.split("(")[0]}
+                    price={laptop.price}
+                  />
+                ))}
+            </LaptopListLayout>
+          ) : (
+            <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+          )}
         </RightLayoutList>
       </MainLayoutList>
     </>

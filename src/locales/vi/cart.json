@@ -1,0 +1,18 @@
+{
+  "cart": "Giỏ hàng",
+  "pay": "Thanh toán",
+  "close": "Đóng",
+  "add_to_cart": "Thêm vào giỏ hàng",
+  "add_to_cart_success": "Thêm laptop vào giỏ hàng thành công",
+  "remove_from_cart": "Xóa khỏi giỏ hàng",
+  "remove_from_cart_success": "Xóa laptop khỏi giỏ hàng thành công",
+  "increase_quantity_cart": "Tăng số lượng của laptop thành công",
+  "total": "Tổng tiền",
+  "delete_product": "Xác nhận xóa",
+  "confirm_delete_content": "Bạn có chắc muốn xóa laptop này không?",
+  "add_to_favorite": "Thêm vào danh sách yêu thích",
+  "add_to_favorite_success": "Thêm laptop vào danh sách yêu thích thành công",
+  "remove_from_favorite": "Xóa khỏi danh sách yêu thích",
+  "remove_from_favorite_success": "Xóa laptop khỏi danh sách yêu thích thành công",
+  "in_stock": "Còn hàng"
+}
