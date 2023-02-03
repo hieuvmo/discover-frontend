@@ -17,6 +17,7 @@ export const cartSlice = createSlice({
   name: "cart",
   initialState,
   reducers: {
+    resetCart: (state: CartState) => ({ ...state, cartList: [] }),
     addToCart: (state: CartState, action: PayloadAction<ILaptop>) => {
       let increasedQuantity: boolean = false;
       const addedCartList = state.cartList.map((cart: ICart) => {
@@ -97,6 +98,7 @@ export const cartSlice = createSlice({
 });
 
 export const {
+  resetCart,
   addToCart,
   increaseLaptopQuantity,
   decreaseLaptopQuantity,

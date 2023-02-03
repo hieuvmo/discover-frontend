@@ -1,6 +1,6 @@
 {
   "cart": "Cart",
-  "pay": "Pay",
+  "pay": "Payment",
   "close": "Close",
   "add_to_cart": "Add to cart",
   "add_to_cart_success": "Add laptop to cart successfully",
@@ -14,5 +14,16 @@
   "add_to_favorite_success": "Add laptop to favorite list successfully",
   "remove_from_favorite": "Remove from favorite list",
   "remove_from_favorite_success": "Remove laptop from favorite list successfully",
-  "in_stock": "In stock"
+  "in_stock": "In stock",
+  "order": "Order",
+  "done": "Done",
+  "phone_regex": "This field is only existed the number",
+  "full_name": "Full name",
+  "address": "Address",
+  "phone": "Phone number",
+  "address_placeholder": "Enter address to get order",
+  "phone_placeholder": "Enter phone number",
+  "quantity": "Quantity",
+  "order_success": "You have order successfully",
+  "contact": "Please wait for our staff to contact you in the nearest time"
 }

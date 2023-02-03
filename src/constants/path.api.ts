@@ -44,3 +44,8 @@ export const profileAPIs = {
   UPDATE_PROFILE: (id: string) => `${endPointAPIs.PROFILE}/${id}`,
   UPLOAD_AVATAR: `${endPointAPIs.PROFILE}/avatar-upload`
 };
+
+export const receiptAPIS = {
+  ADD_NEW: `${endPointAPIs.RECEIPT}`,
+  GET_BY_ID: (id: string) => `${endPointAPIs.RECEIPT}/${id}`
+};

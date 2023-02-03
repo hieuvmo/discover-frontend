@@ -1,29 +1,29 @@
 import { Badge } from "antd";
-import { memo, useState } from "react";
-import { useTranslation } from "react-i18next";
+import { memo } from "react";
 
 import { CartIcon } from "icons";
 import { CartInfoModal } from "modules/Cart";
 import { CartModal } from "components";
-import { useAppSelector } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
+import { navigateToCartModal } from "redux/features/receipt.slice";
+import { OrderInfoModal, PaymentInfoModal } from "modules";
 
 const NavCart = () => {
-  const { t } = useTranslation();
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  const dispatch = useAppDispatch();
   const { cartList } = useAppSelector((state: RootState) => state.cart);
+  const { modalType } = useAppSelector((state: RootState) => state.receipt);
 
   const showModal = () => {
-    setIsModalOpen(true);
+    dispatch(navigateToCartModal());
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
+  const renderComponentInModal = () => {
+    if (modalType === "cart") return <CartInfoModal />;
+    if (modalType === "checkout") return <PaymentInfoModal />;
+    return <OrderInfoModal />;
   };
 
-  const handleCancel = () => {
-    setIsModalOpen(false);
-  };
   return (
     <>
       <Badge color="#7F56D9" count={cartList.length} title="5 products in cart">
@@ -34,17 +34,7 @@ const NavCart = () => {
         />
       </Badge>
 
-      <CartModal
-        titleIcon={<CartIcon width={14} fill="#7f56d9" />}
-        titleText={t("cart:cart") || ""}
-        okContent={t("cart:pay")}
-        cancelContent={t("cart:close")}
-        open={isModalOpen}
-        onOk={handleOk}
-        onCancel={handleCancel}
-      >
-        <CartInfoModal />
-      </CartModal>
+      <CartModal>{renderComponentInModal()}</CartModal>
     </>
   );
 };

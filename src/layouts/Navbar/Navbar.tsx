@@ -1,12 +1,17 @@
 import clsx from "clsx";
-import { memo } from "react";
+import { memo, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 import { LanguageSelector } from "components";
 import { Logo, MenuIcon } from "icons";
 import { routerPaths } from "routers/router.paths";
-import { useAppSelector } from "hooks/useRedux";
+import { useAppDispatch, useAppSelector } from "hooks/useRedux";
 import { RootState } from "redux/store";
+import {
+  getDistrictActionRequest,
+  getProvinceActionRequest,
+  getWardActionRequest
+} from "redux/features/profile.slice";
 import NavUser from "./NavUser/NavUser";
 import NavCart from "./NavCart/NavCart";
 import NavSearch from "./NavSearch/NavSearch";
@@ -19,7 +24,10 @@ interface NavBarProps {
 
 const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
   const navigate = useNavigate();
-  const { userInfo } = useAppSelector((state: RootState) => state.auth);
+  const dispatch = useAppDispatch();
+  const { userInfo, profile } = useAppSelector(
+    (state: RootState) => state.auth
+  );
 
   const navigateToHomePage = () => navigate(routerPaths.HOME);
 
@@ -33,6 +41,19 @@ const Navbar = ({ navVisible, toggleNavVisibility }: NavBarProps) => {
       );
     return <NavUser />;
   };
+
+  useEffect(() => {
+    dispatch(getProvinceActionRequest());
+  }, [dispatch]);
+
+  useEffect(() => {
+    if (profile?.province)
+      dispatch(getDistrictActionRequest(profile?.province));
+  }, [dispatch, profile?.province]);
+
+  useEffect(() => {
+    if (profile?.district) dispatch(getWardActionRequest(profile?.district));
+  }, [dispatch, profile?.district]);
 
   return (
     <nav
