@@ -38,7 +38,7 @@ const OrderCard = ({ receiptId }: OrderCardProps) => {
   };
 
   const receiptItem = useMemo(() => {
-    return receiptList.filter(
+    return receiptList?.filter(
       (receipt: IReceipt) => receipt._id === receiptId
     )[0];
   }, [receiptId, receiptList]);
@@ -50,7 +50,7 @@ const OrderCard = ({ receiptId }: OrderCardProps) => {
     },
     {
       key: "order_date",
-      value: moment(receiptItem.lastModify || "").format("YYYY/MM/DD,  h:mm:ss")
+      value: moment(receiptItem.lastModify || "").format("YYYY/MM/DD, h:mm:ss")
     },
     {
       key: "address",
@@ -81,21 +81,22 @@ const OrderCard = ({ receiptId }: OrderCardProps) => {
           ))}
 
           <OrderListInReceipt>
-            {receiptItem.items.map((laptop: ILaptop, index: number) => (
-              <CartContentContainer key={laptop._id}>
-                <img src={laptop.productImg[2]} alt={laptop.productImg[2]} />
-                <CartLaptopDetail>
-                  <Title level={5}>{laptop.productName}</Title>
-                  <Divider />
-                  <CheckoutQuantityContainer>
-                    <Text>{`${t("cart:quantity")}: ${
-                      receiptItem.quantity[index]
-                    }`}</Text>
-                    <Text>{laptop.price}</Text>
-                  </CheckoutQuantityContainer>
-                </CartLaptopDetail>
-              </CartContentContainer>
-            ))}
+            {receiptItem.items.length &&
+              receiptItem.items.map((laptop: ILaptop, index: number) => (
+                <CartContentContainer key={laptop._id}>
+                  <img src={laptop.productImg[2]} alt={laptop.productImg[2]} />
+                  <CartLaptopDetail>
+                    <Title level={5}>{laptop.productName}</Title>
+                    <Divider />
+                    <CheckoutQuantityContainer>
+                      <Text>{`${t("cart:quantity")}: ${
+                        receiptItem.quantity[index]
+                      }`}</Text>
+                      <Text>{laptop.price}</Text>
+                    </CheckoutQuantityContainer>
+                  </CartLaptopDetail>
+                </CartContentContainer>
+              ))}
           </OrderListInReceipt>
         </OrderCardBody>
       )}

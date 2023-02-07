@@ -43,15 +43,16 @@ const ReceiptInfoModal = () => {
   const { loading } = useAppSelector((state: RootState) => state.receipt);
 
   const customerAddress = useMemo(() => {
-    const wardItem = wardList.find(
-      (ward: IWard) => ward.ward_id === profile?.ward
-    );
-    const districtItem = districtList.find(
-      (district: IDistrict) => district.district_id === profile?.district
-    );
-    const provinceItem = provinceList.find(
-      (province: IProvince) => province.province_id === profile?.province
-    );
+    const wardItem =
+      wardList.find((ward: IWard) => ward.ward_id === profile?.ward) || null;
+    const districtItem =
+      districtList.find(
+        (district: IDistrict) => district.district_id === profile?.district
+      ) || null;
+    const provinceItem =
+      provinceList.find(
+        (province: IProvince) => province.province_id === profile?.province
+      ) || null;
     return `${profile?.address}, ${wardItem?.ward_name}, ${districtItem?.district_name}, ${provinceItem?.province_name}`;
   }, [
     districtList,
