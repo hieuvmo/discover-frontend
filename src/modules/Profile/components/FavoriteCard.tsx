@@ -44,13 +44,16 @@ const FavoriteCard = ({ laptopId }: { laptopId: string }) => {
   }, [favoriteList, laptopId]);
 
   return (
-    <FavoriteCardContainer onClick={navigateToLaptopDetail}>
+    <FavoriteCardContainer>
       <img
         src={selectedLaptopInFavoriteList.productImg[2]}
         alt={selectedLaptopInFavoriteList.productName}
+        onClick={navigateToLaptopDetail}
       />
       <FavoriteCardDetail>
-        <Title level={5}>{selectedLaptopInFavoriteList.productName}</Title>
+        <Title level={5} onClick={navigateToLaptopDetail}>
+          {selectedLaptopInFavoriteList.productName}
+        </Title>
         <Divider className="my-2" />
         <FavoriteCardStatus>
           <Text>{t("cart:in_stock")}</Text>

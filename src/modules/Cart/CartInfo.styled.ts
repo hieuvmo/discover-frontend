@@ -12,6 +12,7 @@ export const CartContentContainer = styled.div`
   img {
     width: 7.5rem;
     height: 7.5rem;
+    margin: auto;
   }
 `;
 

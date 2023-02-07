@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-export const CartModalContainer = styled.div``;
-
 export const CartModalTitle = styled.div`
   display: flex;
   align-items: center;

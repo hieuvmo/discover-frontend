@@ -18,6 +18,7 @@ export type IReceiptInput = Omit<IReceipt, "userId" | "items"> & {
 };
 
 export interface IReceiptResponse {
-  data: IReceiptInput;
+  data: IReceiptInput | null;
   message: string;
+  success?: boolean;
 }

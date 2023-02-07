@@ -71,7 +71,7 @@ const CartInfoModal = () => {
       {cartList.map(({ laptop, quantity }) => (
         <CartContentContainer key={laptop._id}>
           <img src={laptop.productImg[2]} alt={laptop.productImg[2]} />
-          <CartLaptopDetail className="flex flex-col">
+          <CartLaptopDetail>
             <Title level={5}>{laptop.productName}</Title>
             <Divider />
             <CartQuantityContainer>

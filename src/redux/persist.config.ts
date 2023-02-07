@@ -7,6 +7,7 @@ import authReducer from "./features/auth.slice";
 import profileReducer from "./features/profile.slice";
 import cartReducer from "./features/cart.slice";
 import favoriteReducer from "./features/favorite.slice";
+import receiptReducer from "./features/receipt.slice";
 
 const searchPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   key: "search",
@@ -42,11 +43,18 @@ const favoritePersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
   storage
 };
 
+const receiptPersistConfig: PersistConfig<any, unknown, unknown, unknown> = {
+  key: "receipt",
+  storage,
+  blacklist: ["modalType", "openModal"]
+};
+
 export default {
   search: persistReducer(searchPersistConfig, searchReducer),
   laptop: persistReducer(laptopPersistConfig, laptopReducer),
   auth: persistReducer(authPersistConfig, authReducer),
   profile: persistReducer(profilePersistConfig, profileReducer),
   cart: persistReducer(cartPersistConfig, cartReducer),
-  favorite: persistReducer(favoritePersistConfig, favoriteReducer)
+  favorite: persistReducer(favoritePersistConfig, favoriteReducer),
+  receipt: persistReducer(receiptPersistConfig, receiptReducer)
 };

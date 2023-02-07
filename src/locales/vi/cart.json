@@ -14,5 +14,17 @@
   "add_to_favorite_success": "Thêm laptop vào danh sách yêu thích thành công",
   "remove_from_favorite": "Xóa khỏi danh sách yêu thích",
   "remove_from_favorite_success": "Xóa laptop khỏi danh sách yêu thích thành công",
-  "in_stock": "Còn hàng"
+  "in_stock": "Còn hàng",
+  "order": "Đặt hàng",
+  "done": "Hoàn thành",
+  "phone_regex": "Trường này chỉ tồn tại số",
+  "full_name": "Tên đầy đủ",
+  "address": "Địa chỉ",
+  "phone": "Số điện thoại",
+  "address_placeholder": "Nhập địa chỉ nhận hàng",
+  "phone_placeholder": "Nhập số điện thoại",
+  "quantity": "Số lượng",
+  "order_success": "Bạn đã đặt hàng thành công",
+  "contact": "Bạn hãy đợi nhân viên của chúng tôi liên lạc trong khoảng thời gian gần nhất",
+  "order_date": "Ngày đặt hàng"
 }

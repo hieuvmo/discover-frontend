@@ -97,3 +97,58 @@ export const FavoriteCardStatus = styled.div`
     color: #7f56d9;
   }
 `;
+
+export const OrderCardHeader = styled.div`
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  padding: 0.75rem 1rem;
+  border: 1px solid #e8e8ea;
+  border-top-left-radius: 0.5rem;
+  border-top-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  background-color: #ffffff;
+  user-select: none;
+
+  span {
+    color: #34303e;
+  }
+
+  &.dropdown {
+    background-color: #7f56d9;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+
+    span {
+      color: #ffffff;
+    }
+  }
+`;
+
+export const OrderCardBody = styled.div`
+  padding: 1rem;
+  border-inline: 1px solid #e8e8ea;
+  border-block: 1px solid #e8e8ea;
+  background-color: #ffffff;
+  border-bottom-left-radius: 0.5rem;
+  border-bottom-right-radius: 0.5rem;
+  margin-bottom: 1rem;
+`;
+
+export const OrderCardInfo = styled.div`
+  display: flex;
+
+  h5 {
+    min-width: 12rem;
+  }
+
+  span {
+    font-size: 1rem;
+  }
+`;
+
+export const OrderListInReceipt = styled.div`
+  max-height: 15rem;
+  overflow-y: auto;
+`;
