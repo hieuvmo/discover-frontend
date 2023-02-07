@@ -1,10 +1,11 @@
 import { PayloadAction, createSlice } from "@reduxjs/toolkit";
-import { IReceiptInput, IReceiptResponse } from "types/receipt.model";
+import { IReceipt, IReceiptInput, IReceiptResponse } from "types/receipt.model";
 
 export interface ReceiptState {
   modalType: "cart" | "checkout" | "done";
   openModal: boolean;
-  receptItem: IReceiptInput | null;
+  receiptItem: IReceiptInput | null;
+  receiptList: IReceipt[];
   success: boolean;
   message: string;
   loading: boolean;
@@ -13,7 +14,8 @@ export interface ReceiptState {
 const initialState: ReceiptState = {
   modalType: "cart",
   openModal: false,
-  receptItem: null,
+  receiptItem: null,
+  receiptList: [],
   success: false,
   message: "",
   loading: false
@@ -56,9 +58,24 @@ export const receiptSlice = createSlice({
     ) => ({
       ...state,
       loading: false,
-      receptItem: action.payload?.data || null,
+      receiptItem: action.payload?.data || null,
       success: action.payload?.success || false,
       message: action.payload?.message || ""
+    }),
+    getOrderByUserIdActionRequest: (
+      state: ReceiptState,
+      action: PayloadAction<string>
+    ) => ({
+      ...state,
+      loading: true
+    }),
+    getOrderByUserIdActionComplete: (
+      state: ReceiptState,
+      action: PayloadAction<IReceipt[]>
+    ) => ({
+      ...state,
+      loading: false,
+      receiptList: action.payload
     })
   }
 });
@@ -69,7 +86,9 @@ export const {
   navigateToCheckoutModal,
   navigateToOrderDoneModal,
   addNewOrderActionRequest,
-  addNewOrderActionComplete
+  addNewOrderActionComplete,
+  getOrderByUserIdActionRequest,
+  getOrderByUserIdActionComplete
 } = receiptSlice.actions;
 
 export default receiptSlice.reducer;

@@ -11,8 +11,8 @@ export const receiptServices = {
     return data;
   },
 
-  async getReceiptById(id: string): Promise<IReceipt> {
-    const { data } = await unauthorizedRequest.post(receiptAPIS.GET_BY_ID(id));
-    return data;
+  async getReceiptById(id: string): Promise<IReceipt[]> {
+    const { data } = await unauthorizedRequest.get(receiptAPIS.GET_BY_ID(id));
+    return data.data;
   }
 };

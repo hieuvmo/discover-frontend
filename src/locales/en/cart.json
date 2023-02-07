@@ -25,5 +25,6 @@
   "phone_placeholder": "Enter phone number",
   "quantity": "Quantity",
   "order_success": "You have order successfully",
-  "contact": "Please wait for our staff to contact you in the nearest time"
+  "contact": "Please wait for our staff to contact you in the nearest time",
+  "order_date": "Order date"
 }

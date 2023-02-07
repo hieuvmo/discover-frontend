@@ -25,5 +25,6 @@
   "phone_placeholder": "Nhập số điện thoại",
   "quantity": "Số lượng",
   "order_success": "Bạn đã đặt hàng thành công",
-  "contact": "Bạn hãy đợi nhân viên của chúng tôi liên lạc trong khoảng thời gian gần nhất"
+  "contact": "Bạn hãy đợi nhân viên của chúng tôi liên lạc trong khoảng thời gian gần nhất",
+  "order_date": "Ngày đặt hàng"
 }
