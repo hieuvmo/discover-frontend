@@ -1,5 +1,7 @@
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { useSearchParams } from "react-router-dom";
+import qs from "qs";
 
 import { ProfileTabs } from "types/profile.model";
 import { ChangePswForm } from "modules/Auth/ChangePsw";
@@ -15,12 +17,15 @@ import {
 
 const Profile = () => {
   const { t } = useTranslation();
+  const [querryParams, setQuerryParams] = useSearchParams();
+  const querryObj = qs.parse(`${querryParams}`);
   const [selectedTab, setSelectedTab] = useState<ProfileTabs>(
     ProfileTabs.PERSONAL_INFO
   );
 
   const handleClickItemTab = (tabName: ProfileTabs) => {
     setSelectedTab(tabName);
+    setQuerryParams(qs.stringify({ ...querryObj, mode: tabName }));
   };
 
   const renderTab = () => {
