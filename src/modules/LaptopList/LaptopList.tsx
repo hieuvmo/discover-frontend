@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Divider, Empty, Pagination, Spin } from "antd";
+import qs from "qs";
+import { useSearchParams } from "react-router-dom";
 
 import {
   getLaptopListComplete,
@@ -19,6 +21,8 @@ import { LaptopCard, ListCheckbox, ListSearchBar } from "./components";
 
 const LaptopList = () => {
   const [pageNum, setPageNum] = useState<number>(1);
+  const [querryParams, setQuerryParams] = useSearchParams();
+  const querryObj = qs.parse(`${querryParams}`);
   const dispatch = useAppDispatch();
   const { laptopList, loading } = useAppSelector(
     (state: RootState) => state.laptop
@@ -45,6 +49,7 @@ const LaptopList = () => {
 
   const handleChangePageNum = (page: number) => {
     setPageNum(page);
+    setQuerryParams(qs.stringify({ ...querryObj, page }));
   };
 
   useEffect(() => {
