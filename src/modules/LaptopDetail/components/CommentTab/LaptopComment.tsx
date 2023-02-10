@@ -150,29 +150,34 @@ const LaptopComment = () => {
         </SubmitCommentButton>
         <Divider className="my-4" />
       </form>
-      <CommentList>
-        {[...commentList]
-          .sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1))
-          .slice((pageNum - 1) * 5, pageNum * 5)
-          .map((comment: IComment) => (
-            <CommentCard
-              key={comment._id}
-              commentId={comment._id}
-              userId={comment.userId._id}
-              avatar={comment.userProfile[0].avatar}
-              fullName={`${comment.userProfile[0].lastName} ${comment.userProfile[0].firstName}`}
-              comment={comment.comment}
-              rating={comment.rating}
-              updatedAt={comment.updatedAt}
-            />
-          ))}
-        <Pagination
-          current={pageNum}
-          total={commentList.length}
-          onChange={handleChangePageNum}
-          defaultPageSize={5}
-        />
-      </CommentList>
+      {commentList.length ? (
+        <CommentList>
+          {[...commentList]
+            .sort((a, b) => (a.updatedAt > b.updatedAt ? -1 : 1))
+            .slice((pageNum - 1) * 5, pageNum * 5)
+            .map((comment: IComment) => (
+              <CommentCard
+                key={comment._id}
+                commentId={comment._id}
+                userId={comment.userId._id}
+                avatar={comment.userProfile[0].avatar}
+                fullName={`${comment.userProfile[0].lastName} ${comment.userProfile[0].firstName}`}
+                comment={comment.comment}
+                rating={comment.rating}
+                updatedAt={comment.updatedAt}
+              />
+            ))}
+
+          <Pagination
+            current={pageNum}
+            total={commentList.length}
+            onChange={handleChangePageNum}
+            defaultPageSize={5}
+          />
+        </CommentList>
+      ) : (
+        <div />
+      )}
     </>
   );
 };

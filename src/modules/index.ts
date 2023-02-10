@@ -7,3 +7,4 @@ export * from "./Profile";
 export * from "./LaptopList";
 export * from "./LaptopDetail";
 export * from "./Receipt";
+export * from "./Home";
