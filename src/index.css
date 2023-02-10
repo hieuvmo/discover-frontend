@@ -37,3 +37,12 @@
 .ant-notification-notice {
   top: 4rem;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  color: #7f56d9;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #7f56d9;
+}
